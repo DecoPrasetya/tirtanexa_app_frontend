@@ -73,8 +73,29 @@ export default function AuthPage() {
       toast.error("Harap setujui Syarat & Ketentuan.");
       return;
     }
-    // TODO: implement register logic here in the future
-    toast.success("Akun Berhasil Dibuat!");
+    
+    if (!daftarEmail || !daftarPw || !daftarFn) {
+      toast.error("Nama depan, email, dan password wajib diisi.");
+      return;
+    }
+
+    try {
+      const { register } = useAuthStore.getState();
+      const fullName = daftarLn ? `${daftarFn} ${daftarLn}` : daftarFn;
+      
+      await register(daftarEmail, daftarPw, fullName);
+      toast.success("Akun Berhasil Dibuat! Silakan login.");
+      
+      // Reset form and switch to login tab
+      setDaftarEmail("");
+      setDaftarPw("");
+      setDaftarFn("");
+      setDaftarLn("");
+      setActiveTab("login");
+      setRegisterStep(0);
+    } catch (err: any) {
+      toast.error(err.message || "Gagal mendaftar. Silakan coba lagi.");
+    }
   };
 
   return (
