@@ -148,9 +148,9 @@ export default function DashboardLayout({
       </aside>
 
       {/* MAIN WRAP */}
-      <div className="mainwrap">
+      <div className="mainwrap flex flex-col h-screen overflow-hidden">
         {/* Mobile topbar */}
-        <header className="topbar">
+        <header className="topbar sticky top-0 z-50 bg-white shadow-sm shrink-0">
           <button className="ham" onClick={() => setSbOpen(true)}>☰</button>
           <div className="tbar-brand">
             <div className="lmark">T</div>
@@ -163,7 +163,7 @@ export default function DashboardLayout({
         </header>
 
         {/* Desktop topbar */}
-        <div className="dtopbar">
+        <div className="dtopbar sticky top-0 z-50 bg-[#f5f7fa]/95 backdrop-blur-md shrink-0 py-3 border-b border-slate-200/50">
           <span className="dtitle">Dashboard</span>
           <div className="dsearch"><span style={{color:"var(--gray-400)", fontSize:"13px"}}>🔍</span><input placeholder="Cari soal, materi..." /></div>
           <div style={{display:"flex", gap:"8px", alignItems:"center"}}>
@@ -173,12 +173,12 @@ export default function DashboardLayout({
         </div>
 
         {/* PAGE */}
-        <main className="page">
+        <main className="page flex-1 overflow-y-auto relative">
           {children}
         </main>
 
         {/* BOTTOM NAV */}
-        <nav className="bnav">
+        <nav className="bnav shrink-0 z-50 bg-white">
           <div className="bninner">
             {filteredItems.slice(0, 5).map(item => (
               <Link 
