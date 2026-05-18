@@ -53,6 +53,7 @@ export default function DashboardLayout({
   const pathname = usePathname();
   const { user, isInitialized, initialize, logout } = useAuthStore();
   const [sbOpen, setSbOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const role = user?.role || "STUDENT";
 
   useEffect(() => {
@@ -112,6 +113,34 @@ export default function DashboardLayout({
 
   return (
     <div className="dashboard-wrapper">
+      {/* SEARCH POPUP (Mobile) */}
+      {searchOpen && (
+        <div
+          className="fixed inset-0 z-[999] bg-slate-900/70 backdrop-blur-sm flex justify-start p-4 pt-20 flex-col items-center lg:hidden animate-fade-in"
+          onClick={() => setSearchOpen(false)}
+        >
+          <div
+            className="relative w-full max-w-lg h-fit"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Cari soal, materi..."
+                className="w-full pl-14 pr-6 py-4 rounded-full bg-white text-slate-800 text-base font-medium placeholder:text-slate-400 border-2 border-transparent focus:border-teal-500 focus:outline-none shadow-2xl transition-colors"
+                autoFocus
+              />
+            </div>
+          </div>
+          <button
+            onClick={() => setSearchOpen(false)}
+            className="mt-8 text-white/80 font-semibold text-sm bg-white/10 px-5 py-2 rounded-full hover:bg-white/20 transition-colors"
+          >
+            Tutup Pencarian
+          </button>
+        </div>
+      )}
+
       {/* OVERLAY */}
       <div className={`overlay ${sbOpen ? "on" : ""}`} onClick={closeSb}></div>
 
@@ -150,20 +179,21 @@ export default function DashboardLayout({
       {/* MAIN WRAP */}
       <div className="mainwrap flex flex-col h-screen overflow-hidden">
         {/* Mobile topbar */}
-        <header className="topbar sticky top-0 z-50 bg-white shadow-sm shrink-0">
+        <header className="topbar sticky top-0 z-50 bg-white shadow-sm shrink-0 lg:hidden">
           <button className="ham" onClick={() => setSbOpen(true)}>☰</button>
           <div className="tbar-brand">
             <div className="lmark">T</div>
             <span>Tirtanexa</span>
           </div>
           <div className="tbar-r">
+            <button className="icobtn" onClick={() => setSearchOpen(true)}>🔍</button>
             <button className="icobtn">🔔</button>
             <div className="tav">{dpInitials}</div>
           </div>
         </header>
 
         {/* Desktop topbar */}
-        <div className="dtopbar sticky top-0 z-50 bg-[#f5f7fa]/95 backdrop-blur-md shrink-0 py-3 border-b border-slate-200/50">
+        <div className="dtopbar hidden lg:flex sticky top-0 z-50 bg-[#f5f7fa]/95 backdrop-blur-md shrink-0 py-3 border-b border-slate-200/50">
           <span className="dtitle">Dashboard</span>
           <div className="dsearch"><span style={{color:"var(--gray-400)", fontSize:"13px"}}>🔍</span><input placeholder="Cari soal, materi..." /></div>
           <div style={{display:"flex", gap:"8px", alignItems:"center"}}>
