@@ -316,7 +316,8 @@ export default function DashboardLayout() {
                 </h3>
                 <div className="flex flex-col gap-4">
                   {availableTryouts.slice(0, 5).map((tryout) => (
-                    <div
+                    <Link
+                      href={`/dashboard/tryout/${tryout.id}`}
                       key={tryout.id}
                       className="w-full bg-gradient-to-r from-teal-500 to-teal-400 text-white rounded-3xl shadow-sm flex flex-row items-stretch gap-4 md:gap-6 relative overflow-hidden group cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all min-h-[115px]"
                     >
@@ -332,11 +333,11 @@ export default function DashboardLayout() {
 
                       {/* Content */}
                       <div className="flex-1 w-full z-10 flex flex-col justify-center p-6 md:p-8">
-                        <span className="bg-white/20 text-xs font-semibold px-3 py-1 rounded-lg w-fit mb-2">
+                        <span className="bg-white/20 text-xs font-semibold px-3 py-1 rounded-lg w-fit mb-2 text-white">
                           {tryout.type}
                         </span>
 
-                        <h4 className="text-xl md:text-2xl font-bold leading-tight mt-1">
+                        <h4 className="text-xl md:text-2xl font-bold leading-tight mt-1 text-white">
                           {tryout.title}
                         </h4>
 
@@ -344,7 +345,7 @@ export default function DashboardLayout() {
                           {tryout.date}
                         </p>
                       </div>
-                    </div>
+                    </Link>
                   ))}
                 </div>
                 {availableTryouts.length > 5 && (

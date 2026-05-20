@@ -3,11 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { Trophy, Search, ArrowRight, Users, Clock } from "lucide-react";
-import Card from "@/components/ui/Card";
-import Button from "@/components/ui/Button";
-import Input from "@/components/ui/Input";
-import Badge from "@/components/ui/Badge";
+import { Trophy, Users, Clock } from "lucide-react";
 import { api } from "@/lib/api";
 import toast from "react-hot-toast";
 
@@ -29,44 +25,121 @@ export default function TournamentsPage() {
   };
 
   return (
-    <div className="space-y-6">
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
       <div>
-        <h1 className="text-2xl font-bold text-[var(--text)]">Turnamen</h1>
-        <p className="text-sm text-[var(--text-muted)] mt-1">Berkompetisi dengan siswa lain secara realtime</p>
+        <h1 style={{ fontSize: '24px', fontWeight: 'bold', color: '#1e293b', margin: 0 }}>Turnamen</h1>
+        <p style={{ fontSize: '14px', color: '#64748b', marginTop: '4px' }}>Berkompetisi dengan siswa lain secara realtime</p>
+      </div>
+
+      {/* Info cards */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px' }}>
+        {[
+          { icon: Users, title: "Kompetisi Realtime", desc: "Bersaing langsung dengan peserta lain", bg: '#f0fdfa', iconColor: '#0d9488', borderColor: '#ccfbf1' },
+          { icon: Clock, title: "Waktu Terbatas", desc: "Kerjakan soal dalam waktu yang ditentukan", bg: '#fffbeb', iconColor: '#d97706', borderColor: '#fef3c7' },
+          { icon: Trophy, title: "Leaderboard", desc: "Lihat peringkatmu secara langsung", bg: '#eef2ff', iconColor: '#4f46e5', borderColor: '#e0e7ff' },
+        ].map((item, i) => (
+          <motion.div key={item.title} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }}>
+            <div
+              style={{
+                backgroundColor: 'white',
+                borderRadius: '16px',
+                boxShadow: '0 1px 2px rgba(0,0,0,0.05)',
+                border: `1px solid ${item.borderColor}`,
+                padding: '24px',
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                transition: 'transform 0.2s, box-shadow 0.2s'
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.boxShadow = '0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06)';
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 1px 2px rgba(0,0,0,0.05)';
+              }}
+            >
+              <div style={{ width: '48px', height: '48px', borderRadius: '12px', backgroundColor: item.bg, color: item.iconColor, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '16px' }}>
+                <item.icon size={24} />
+              </div>
+              <h3 style={{ fontSize: '16px', fontWeight: 'bold', color: '#1e293b', marginBottom: '4px', margin: 0 }}>{item.title}</h3>
+              <p style={{ fontSize: '13px', color: '#64748b', margin: 0, lineHeight: 1.5 }}>{item.desc}</p>
+            </div>
+          </motion.div>
+        ))}
       </div>
 
       {/* Join by code */}
-      <Card padding="lg" className="max-w-lg">
-        <div className="flex items-center gap-3 mb-5">
-          <div className="p-2.5 rounded-xl gradient-teal text-white"><Trophy size={20}/></div>
-          <div>
-            <h2 className="text-base font-semibold text-[var(--text)]">Gabung Turnamen</h2>
-            <p className="text-xs text-[var(--text-muted)]">Masukkan kode dari guru atau penyelenggara</p>
+      <div
+        style={{
+          backgroundColor: 'white',
+          borderRadius: '16px',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)',
+          border: '1px solid #e2e8f0',
+          padding: '24px',
+          maxWidth: '512px'
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
+          <div style={{
+            padding: '10px',
+            borderRadius: '12px',
+            background: 'linear-gradient(135deg, #0d9488, #0f766e)',
+            color: 'white',
+            display: 'flex', alignItems: 'center', justifyContent: 'center'
+          }}>
+            <Trophy size={20} />
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+            <h2 style={{ fontSize: '16px', fontWeight: '600', color: '#1e293b', margin: 0, lineHeight: 1.2 }}>Gabung Turnamen</h2>
+            <p style={{ fontSize: '12px', color: '#64748b', margin: 0, lineHeight: 1.2 }}>Masukkan kode dari guru atau penyelenggara</p>
           </div>
         </div>
-        <div className="flex gap-3">
-          <Input placeholder="Kode turnamen (contoh: ABC123)" value={code} onChange={(e) => setCode(e.target.value.toUpperCase())}/>
-          <Button isLoading={joining} onClick={handleJoin} className="flex-shrink-0">Gabung</Button>
+        <div style={{ display: 'flex', gap: '12px' }}>
+          <input
+            placeholder="Kode turnamen (contoh: ABC123)"
+            value={code}
+            onChange={(e) => setCode(e.target.value.toUpperCase())}
+            style={{
+              flex: 1,
+              padding: '12px 16px',
+              borderRadius: '12px',
+              border: '2px solid #e2e8f0',
+              fontSize: '14px',
+              outline: 'none',
+              color: '#1e293b',
+              backgroundColor: '#f8fafc',
+              transition: 'border-color 0.2s'
+            }}
+            onFocus={(e) => e.target.style.borderColor = '#0d9488'}
+            onBlur={(e) => e.target.style.borderColor = '#e2e8f0'}
+          />
+          <button
+            disabled={joining}
+            onClick={handleJoin}
+            style={{
+              flexShrink: 0,
+              backgroundColor: '#0d9488',
+              color: 'white',
+              padding: '0 24px',
+              borderRadius: '12px',
+              fontWeight: 'bold',
+              border: 'none',
+              cursor: joining ? 'not-allowed' : 'pointer',
+              opacity: joining ? 0.7 : 1,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              transition: 'opacity 0.2s, background-color 0.2s',
+              fontSize: '14px'
+            }}
+            onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#0f766e'}
+            onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#0d9488'}
+          >
+            {joining ? 'Memproses...' : 'Gabung'}
+          </button>
         </div>
-      </Card>
-
-      {/* Info cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        {[
-          { icon: Users, title: "Kompetisi Realtime", desc: "Bersaing langsung dengan peserta lain", color: "teal" },
-          { icon: Clock, title: "Waktu Terbatas", desc: "Kerjakan soal dalam waktu yang ditentukan", color: "orange" },
-          { icon: Trophy, title: "Leaderboard", desc: "Lihat peringkatmu secara langsung", color: "teal" },
-        ].map((item, i) => (
-          <motion.div key={item.title} initial={{opacity:0,y:12}} animate={{opacity:1,y:0}} transition={{delay:i*0.1}}>
-            <Card padding="lg" className="h-full">
-              <div className={`w-10 h-10 rounded-xl ${item.color === "teal" ? "bg-[var(--teal-50)]" : "bg-[var(--orange-50)]"} flex items-center justify-center mb-3`}>
-                <item.icon size={20} className={item.color === "teal" ? "text-[var(--teal)]" : "text-[var(--orange)]"}/>
-              </div>
-              <h3 className="text-sm font-semibold text-[var(--text)] mb-1">{item.title}</h3>
-              <p className="text-xs text-[var(--text-muted)]">{item.desc}</p>
-            </Card>
-          </motion.div>
-        ))}
       </div>
     </div>
   );
