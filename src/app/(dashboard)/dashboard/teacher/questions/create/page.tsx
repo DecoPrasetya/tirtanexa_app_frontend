@@ -50,7 +50,7 @@ export default function CreateQuestionPage() {
       await api.questions.create({
         chapterId, content, explanation: explanation || undefined,
         difficulty: difficulty as "EASY"|"MEDIUM"|"HARD",
-        options: options.filter((o) => o.content.trim()).map((o, i) => ({ ...o, order: i })),
+        options: options.filter((o) => o.content.trim()).map((o, i) => ({ ...o, order: i })) as any,
       });
       toast.success("Soal berhasil dibuat!");
       router.push("/dashboard/teacher/questions");

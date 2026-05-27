@@ -27,8 +27,8 @@
   box-sizing: border-box;
 }
 
-.dashboard-wrapper a { text-decoration: none; color: inherit; }
-.dashboard-wrapper button { font-family: inherit; cursor: pointer; border: none; background: none; }
+.dashboard-wrapper a { text-decoration: none; }
+.dashboard-wrapper button { font-family: inherit; cursor: pointer; }
 
 /* ── OVERLAY ── */
 .dashboard-wrapper .overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.45);backdrop-filter:blur(2px);opacity:0;pointer-events:none;transition:opacity .25s}

@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 @import "tailwindcss";
-@source "../**/*.{js,jsx,ts,tsx}";
+
 /* ============ BRAND DESIGN TOKENS ============ */
 :root {
   /* Primary – Tirtanexa Teal */
@@ -68,8 +68,8 @@
   --topbar-height: 68px;
 }
 
-/* ============ TAILWIND THEME INLINE ============ */
-@theme inline {
+/* ============ TAILWIND THEME ============ */
+@theme {
   --color-teal: var(--teal);
   --color-teal-dark: var(--teal-dark);
   --color-teal-light: var(--teal-light);
@@ -234,3 +234,4 @@ body {
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
+/* Trigger CSS rebuild */
