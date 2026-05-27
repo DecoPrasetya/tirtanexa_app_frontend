@@ -47,7 +47,7 @@ const dummySubjects = {
                 desc: "Materi penalaran induktif berfokus pada penarikan kesimpulan dari contoh spesifik yang ada."
             },
             {
-                title: "Penalaran Kuantitatif",
+                title: "Penalaran Kuantitatiff",
                 desc: "Materi penalaran kuantitatif meliputi pengolahan angka dan data numerik dasar secara terstruktur."
             },
         ],
