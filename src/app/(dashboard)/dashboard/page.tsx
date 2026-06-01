@@ -141,9 +141,9 @@ export default function DashboardLayout() {
   }, [learningProgress]);
 
   return (
-    <div className="min-h-screen flex justify-center p-4 md:p-8 pb-32">
+    <div className="min-h-screen flex justify-center px-4 md:px-8 pt-4 md:pt-6 pb-32">
       {/* Container Utama */}
-      <div className="w-full max-w-7xl grid grid-cols-12 gap-6 lg:gap-12 items-start mt-8 mb-24">
+      <div className="w-full max-w-7xl grid grid-cols-12 gap-6 lg:gap-12 items-start mt-2 mb-24">
         <div className="col-span-12 lg:col-span-8 flex flex-col gap-8">
 
           {/* Header Sapaan */}
@@ -255,55 +255,55 @@ export default function DashboardLayout() {
           </div>
 
           {/* Isi Konten Tab Dinamis */}
-          <div className="min-h-[60vh]">
+          <div className="min-h-[40vh]">
 
             {/* TAMPILAN TAB: TRYOUT */}
             {activeTab === 'TryOut' && (
-              <div className="flex flex-col gap-8 pt-2 pb-20">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="flex flex-col gap-6 pt-2 pb-20">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <Link
                     href="/dashboard/exams/practice"
-                    className="bg-gradient-to-br from-teal-500 to-teal-600 text-white p-6 md:p-8 rounded-3xl shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all flex flex-col items-center justify-center text-center gap-5 relative overflow-hidden group  min-h-[150px]">
+                    className="bg-gradient-to-br from-teal-500 to-teal-600 text-white px-4 py-5 md:py-6 rounded-3xl shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all flex flex-col items-center justify-center text-center gap-3 relative overflow-hidden group min-h-[120px]">
                     {/* Icon background (pojok kanan atas) */}
-                    <div className="absolute -right-4 -top-4 text-8xl opacity-10 group-hover:scale-110 transition-transform duration-300 pointer-events-none">
+                    <div className="absolute -right-2 -top-2 text-7xl opacity-10 group-hover:scale-110 transition-transform duration-300 pointer-events-none">
                       ✏️
                     </div>
 
                     {/* Icon utama */}
-                    <div className="bg-white/20 p-5 rounded-2xl backdrop-blur-md shadow-inner relative z-10">
-                      <span className="text-4xl leading-none block">✏️</span>
+                    <div className="bg-white/20 p-3 rounded-2xl backdrop-blur-md shadow-inner relative z-10">
+                      <span className="text-2xl md:text-3xl leading-none block">✏️</span>
                     </div>
 
                     {/* Text */}
-                    <div className="mt-2 relative z-10">
-                      <h3 className="font-bold text-white text-xl md:text-2xl leading-tight">
+                    <div className="mt-1 relative z-10">
+                      <h3 className="font-bold text-white text-lg md:text-xl leading-tight">
                         Latihan Soal
                       </h3>
-                      <p className="text-teal-100 text-sm mt-2 leading-relaxed">
+                      <p className="text-teal-100 text-xs md:text-sm mt-1 leading-relaxed">
                         Pilih bab, mulai latihan
                       </p>
                     </div>
                   </Link>
                   <Link
                     href="/dashboard/tournaments"
-                    className="bg-gradient-to-br from-indigo-500 to-indigo-600 text-white p-6 md:p-8 rounded-3xl shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all flex flex-col items-center justify-center text-center gap-5 relative overflow-hidden group min-h-[150px]">
+                    className="bg-gradient-to-br from-indigo-500 to-indigo-600 text-white px-4 py-5 md:py-6 rounded-3xl shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all flex flex-col items-center justify-center text-center gap-3 relative overflow-hidden group min-h-[120px]">
                     {/* Icon background (pojok kanan atas) */}
-                    <div className="absolute -right-4 -top-4 text-8xl opacity-10 group-hover:scale-110 transition-transform duration-300 pointer-events-none">
+                    <div className="absolute -right-2 -top-2 text-7xl opacity-10 group-hover:scale-110 transition-transform duration-300 pointer-events-none">
                       🏆
                     </div>
 
                     {/* Icon utama */}
-                    <div className="bg-white/20 p-5 rounded-2xl backdrop-blur-md shadow-inner relative z-10">
-                      <span className="text-4xl leading-none block">🏆</span>
+                    <div className="bg-white/20 p-3 rounded-2xl backdrop-blur-md shadow-inner relative z-10">
+                      <span className="text-2xl md:text-3xl leading-none block">🏆</span>
                     </div>
 
                     {/* Text */}
-                    <div className="mt-2 relative z-10">
-                      <h3 className="font-bold text-white text-xl md:text-2xl leading-tight">
+                    <div className="mt-1 relative z-10">
+                      <h3 className="font-bold text-white text-lg md:text-xl leading-tight">
                         Turnamen
                       </h3>
-                      <p className="text-indigo-100 text-sm mt-2 leading-relaxed">
-                        Kompetisi realtimee
+                      <p className="text-indigo-100 text-xs md:text-sm mt-1 leading-relaxed">
+                        Kompetisi realtime
                       </p>
                     </div>
                   </Link>
@@ -318,29 +318,29 @@ export default function DashboardLayout() {
                       <Link
                         href={`/dashboard/tryout/${tryout.id}`}
                         key={tryout.id}
-                        className="w-full bg-gradient-to-r from-teal-500 to-teal-400 text-white rounded-3xl shadow-sm flex flex-row items-stretch gap-4 md:gap-6 relative overflow-hidden group cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all min-h-[115px]"
+                        className="w-full bg-gradient-to-r from-teal-500 to-teal-400 text-white rounded-3xl shadow-sm flex flex-row items-stretch gap-3 md:gap-4 relative overflow-hidden group cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all min-h-[85px]"
                       >
                         {/* Icon */}
-                        <div className="bg-white w-24 md:w-36 flex-shrink-0 flex items-center justify-center shadow-md md:shadow-[4px_0_20px_rgba(0,0,0,0.08)] z-10 py-6 md:py-0 transition-colors duration-300 group-hover:bg-slate-50">
+                        <div className="bg-white w-16 md:w-24 flex-shrink-0 flex items-center justify-center shadow-md z-10 py-4 md:py-0 transition-colors duration-300 group-hover:bg-slate-50">
 
                           <img
                             src="/snbt2.png"
                             alt="SNBT"
-                            className="w-8 h-8 md:w-16 md:h-16 object-contain transition-transform duration-300 group-hover:scale-110"
+                            className="w-8 h-8 md:w-10 md:h-10 object-contain transition-transform duration-300 group-hover:scale-110"
                           />
                         </div>
 
                         {/* Content */}
-                        <div className="flex-1 w-full z-10 flex flex-col justify-center p-6 md:p-8">
-                          <span className="bg-white/20 text-xs font-semibold px-3 py-1 rounded-lg w-fit mb-2 text-white">
+                        <div className="flex-1 w-full z-10 flex flex-col justify-center py-4 px-3 md:p-5">
+                          <span className="bg-white/20 text-[10px] md:text-xs font-semibold px-2 md:px-3 py-1 rounded-md w-fit mb-1.5 text-white">
                             {tryout.type}
                           </span>
 
-                          <h4 className="text-xl md:text-2xl font-bold leading-tight mt-1 text-white">
+                          <h4 className="text-lg md:text-xl font-bold leading-tight text-white">
                             {tryout.title}
                           </h4>
 
-                          <p className="text-teal-50 text-sm mt-2">
+                          <p className="text-teal-50 text-xs md:text-sm mt-1 md:mt-1.5">
                             {tryout.date}
                           </p>
                         </div>
@@ -410,54 +410,50 @@ export default function DashboardLayout() {
                     {learningProgress.map((item) => (
                       <div
                         key={item.id}
-                        className="w-full bg-gradient-to-r from-teal-500 to-teal-400 text-white rounded-3xl shadow-sm flex flex-row items-stretch gap-4 md:gap-6 relative overflow-hidden group cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all min-h-[160px]"
+                        className="w-full bg-gradient-to-r from-teal-500 to-teal-400 text-white rounded-3xl shadow-sm flex flex-row items-stretch gap-3 md:gap-4 relative overflow-hidden group cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all min-h-[110px]"
                       >
                         {/* Background Icon */}
-                        <div className="absolute right-4 top-4 text-8xl opacity-10 group-hover:scale-110 group-hover:rotate-12 transition-transform duration-500 pointer-events-none">
+                        <div className="absolute right-2 top-2 text-6xl opacity-10 group-hover:scale-110 group-hover:rotate-12 transition-transform duration-500 pointer-events-none">
                           ▶
                         </div>
 
                         {/* Icon (Left Panel) */}
-                        <div className="bg-teal-600 w-20 md:w-28 flex-shrink-0 flex items-center justify-center shadow-md md:shadow-[4px_0_20px_rgba(0,0,0,0.08)] py-6 md:py-0 transition-all duration-300 group-hover:bg-teal-700">
-                          <span className="text-3xl md:text-4xl leading-none transition-transform duration-300 group-hover:scale-110">
+                        <div className="bg-teal-600 w-16 md:w-20 flex-shrink-0 flex items-center justify-center shadow-md py-4 md:py-0 transition-all duration-300 group-hover:bg-teal-700">
+                          <span className="text-2xl md:text-3xl leading-none transition-transform duration-300 group-hover:scale-110">
                             ▶
                           </span>
                         </div>
 
                         {/* Content */}
-                        <div className="flex-1 flex flex-col justify-center p-6 md:p-8 gap-3">
+                        <div className="flex-1 flex flex-col justify-center py-4 px-3 md:p-5 gap-2">
 
                           {/* Top */}
                           <div className="flex justify-between items-center gap-3 pr-2">
-                            <span className="bg-white/20 text-xs font-semibold px-3 py-1 rounded-lg uppercase tracking-wide">
+                            <span className="bg-white/20 text-[10px] md:text-xs font-semibold px-2 py-1 rounded-md uppercase tracking-wide">
                               {item.category}
                             </span>
-
-                            {/* <span className="font-semibold text-xs bg-white text-teal-600 px-3 py-1 rounded-full shadow-sm mr-2">
-                              {item.status}
-                            </span> */}
                           </div>
 
                           {/* Title */}
-                          <h4 className="text-xl md:text-2xl font-bold leading-tight">
+                          <h4 className="text-lg md:text-xl font-bold leading-tight">
                             {item.title}
                           </h4>
 
                           {/* Subtitle */}
-                          <p className="text-teal-50 text-sm">
+                          <p className="text-teal-50 text-xs md:text-sm">
                             {item.subtitle}
                           </p>
 
                           {/* Progress Bar */}
-                          <div className="w-full mt-3">
+                          <div className="w-full mt-1.5">
 
                             {/* Label + persen */}
-                            <div className="flex text-xs text-white/80 mb-1">
+                            <div className="flex text-[10px] md:text-xs text-white/80 mb-1">
                               <span className="font-bold">{progressWidth}%</span>
                             </div>
 
                             {/* Bar background */}
-                            <div className="w-[96%] ml-auto bg-white/20 h-2.5 rounded-full overflow-hidden">
+                            <div className="w-full bg-white/20 h-1.5 md:h-2 rounded-full overflow-hidden">
 
                               {/* Bar isi (ANIMASI) */}
                               <div
@@ -488,14 +484,14 @@ export default function DashboardLayout() {
                     { title: 'Literasi B. Inggris', desc: 'Reading & Vocabulary', icon: '🌐', progress: 10, color: 'bg-indigo-500', light: 'bg-indigo-50', text: 'text-indigo-600', href: '/belajar/bahasa-inggris' },
                     { title: 'Penalaran Matematika', desc: 'Pemecahan masalah matematis', icon: '🔢', progress: 0, color: 'bg-amber-500', light: 'bg-amber-50', text: 'text-amber-600', href: '/belajar/matematika' }
                   ].map((item, idx) => (
-                    <Link href={item.href} key={idx} className="bg-white border border-slate-200 p-5 rounded-2xl shadow-sm hover:shadow-md transition-all hover:-translate-y-1 cursor-pointer group min-h-[80px] flex flex-col justify-center" style={{ textDecoration: 'none' }}>
-                      <div className="flex items-center gap-4 pr-4">
-                        <div className={`${item.light} ${item.text} pr-4 w-14 h-14 rounded-2xl flex items-center justify-center text-3xl group-hover:scale-110 transition-transform duration-300`}>
+                    <Link href={item.href} key={idx} className="bg-white border border-slate-200 p-3 md:p-4 rounded-2xl shadow-sm hover:shadow-md transition-all hover:-translate-y-1 cursor-pointer group min-h-[60px] flex flex-col justify-center" style={{ textDecoration: 'none' }}>
+                      <div className="flex items-center gap-3 md:gap-4 pr-2 md:pr-4">
+                        <div className={`${item.light} ${item.text} w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center text-xl md:text-2xl shrink-0 group-hover:scale-110 transition-transform duration-300`}>
                           {item.icon}
                         </div>
                         <div className="flex-1">
-                          <h4 className="font-bold text-slate-800 line-clamp-1">{item.title}</h4>
-                          <p className="text-xs text-slate-500 mt-0.5 line-clamp-1">{item.desc}</p>
+                          <h4 className="font-bold text-sm md:text-base text-slate-800 line-clamp-1">{item.title}</h4>
+                          <p className="text-[11px] md:text-xs text-slate-500 mt-0.5 line-clamp-1">{item.desc}</p>
                         </div>
                       </div>
                     </Link>
@@ -509,90 +505,90 @@ export default function DashboardLayout() {
               <div className="flex flex-col gap-8 pt-2 pb-20">
                 {/* STAT GRID */}
                 {/* STAT GRID */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
-                  <div className="bg-white border border-slate-200 px-5 py-6 rounded-3xl shadow-sm flex flex-col items-center justify-center text-center hover:border-teal-200 hover:shadow-md transition-all duration-300 min-h-[140px]">
-                    <div className="w-14 h-14 bg-teal-50 text-2xl rounded-2xl flex items-center justify-center mb-4 shadow-sm">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
+                  <div className="bg-white border border-slate-200 px-3 py-4 md:py-5 rounded-[20px] shadow-sm flex flex-col items-center justify-center text-center hover:border-teal-200 hover:shadow-md transition-all duration-300 min-h-[100px] md:min-h-[120px]">
+                    <div className="w-10 h-10 md:w-12 md:h-12 bg-teal-50 text-xl md:text-2xl rounded-xl md:rounded-2xl flex items-center justify-center mb-2 md:mb-3 shadow-sm">
                       📋
                     </div>
 
-                    <div className="text-[11px] text-slate-500 font-semibold tracking-widest uppercase mb-2">
+                    <div className="text-[10px] md:text-[11px] text-slate-500 font-semibold tracking-widest uppercase mb-1 md:mb-1.5">
                       Latihan
                     </div>
 
-                    <div className="text-2xl font-bold text-slate-800 leading-none">
+                    <div className="text-xl md:text-2xl font-bold text-slate-800 leading-none">
                       {loading ? "..." : totalExams}
                     </div>
 
-                    <div className="text-xs text-slate-400 mt-3 leading-relaxed">
+                    <div className="text-[10px] md:text-xs text-slate-400 mt-1 md:mt-2 leading-relaxed">
                       Ujian selesai
                     </div>
                   </div>
 
-                  <div className="bg-white border border-slate-200 px-5 py-6 rounded-3xl shadow-sm flex flex-col items-center justify-center text-center hover:border-orange-200 hover:shadow-md transition-all duration-300 min-h-[140px]">
-                    <div className="w-14 h-14 bg-orange-50 text-2xl rounded-2xl flex items-center justify-center mb-4 shadow-sm">
+                  <div className="bg-white border border-slate-200 px-3 py-4 md:py-5 rounded-[20px] shadow-sm flex flex-col items-center justify-center text-center hover:border-orange-200 hover:shadow-md transition-all duration-300 min-h-[100px] md:min-h-[120px]">
+                    <div className="w-10 h-10 md:w-12 md:h-12 bg-orange-50 text-xl md:text-2xl rounded-xl md:rounded-2xl flex items-center justify-center mb-2 md:mb-3 shadow-sm">
                       📊
                     </div>
 
-                    <div className="text-[11px] text-slate-500 font-semibold tracking-widest uppercase mb-2">
+                    <div className="text-[10px] md:text-[11px] text-slate-500 font-semibold tracking-widest uppercase mb-1 md:mb-1.5">
                       Skor IRT
                     </div>
 
-                    <div className="text-2xl font-bold text-slate-800 leading-none">
+                    <div className="text-xl md:text-2xl font-bold text-slate-800 leading-none">
                       {loading ? "..." : (avgScore || "—")}
                     </div>
 
-                    <div className="text-xs text-slate-400 mt-3 leading-relaxed">
+                    <div className="text-[10px] md:text-xs text-slate-400 mt-1 md:mt-2 leading-relaxed">
                       Rata-rata 0–1000
                     </div>
                   </div>
 
-                  <div className="bg-white border border-slate-200 px-5 py-6 rounded-3xl shadow-sm flex flex-col items-center justify-center text-center hover:border-indigo-200 hover:shadow-md transition-all duration-300 min-h-[140px]">
-                    <div className="w-14 h-14 bg-indigo-50 text-2xl rounded-2xl flex items-center justify-center mb-4 shadow-sm">
+                  <div className="bg-white border border-slate-200 px-3 py-4 md:py-5 rounded-[20px] shadow-sm flex flex-col items-center justify-center text-center hover:border-indigo-200 hover:shadow-md transition-all duration-300 min-h-[100px] md:min-h-[120px]">
+                    <div className="w-10 h-10 md:w-12 md:h-12 bg-indigo-50 text-xl md:text-2xl rounded-xl md:rounded-2xl flex items-center justify-center mb-2 md:mb-3 shadow-sm">
                       🥇
                     </div>
 
-                    <div className="text-[11px] text-slate-500 font-semibold tracking-widest uppercase mb-2">
+                    <div className="text-[10px] md:text-[11px] text-slate-500 font-semibold tracking-widest uppercase mb-1 md:mb-1.5">
                       Ranking
                     </div>
 
-                    <div className="text-2xl font-bold text-slate-800 leading-none">
+                    <div className="text-xl md:text-2xl font-bold text-slate-800 leading-none">
                       —
                     </div>
 
-                    <div className="text-xs text-slate-400 mt-3 leading-relaxed">
+                    <div className="text-[10px] md:text-xs text-slate-400 mt-1 md:mt-2 leading-relaxed">
                       Belum ada data
                     </div>
                   </div>
 
-                  <div className="bg-white border border-slate-200 px-5 py-6 rounded-3xl shadow-sm flex flex-col items-center justify-center text-center hover:border-rose-200 hover:shadow-md transition-all duration-300 min-h-[140px]">
-                    <div className="w-14 h-14 bg-rose-50 text-2xl rounded-2xl flex items-center justify-center mb-4 shadow-sm">
+                  <div className="bg-white border border-slate-200 px-3 py-4 md:py-5 rounded-[20px] shadow-sm flex flex-col items-center justify-center text-center hover:border-rose-200 hover:shadow-md transition-all duration-300 min-h-[100px] md:min-h-[120px]">
+                    <div className="w-10 h-10 md:w-12 md:h-12 bg-rose-50 text-xl md:text-2xl rounded-xl md:rounded-2xl flex items-center justify-center mb-2 md:mb-3 shadow-sm">
                       🏆
                     </div>
 
-                    <div className="text-[11px] text-slate-500 font-semibold tracking-widest uppercase mb-2">
+                    <div className="text-[10px] md:text-[11px] text-slate-500 font-semibold tracking-widest uppercase mb-1 md:mb-1.5">
                       Turnamen
                     </div>
 
-                    <div className="text-2xl font-bold text-slate-800 leading-none">
+                    <div className="text-xl md:text-2xl font-bold text-slate-800 leading-none">
                       —
                     </div>
 
-                    <div className="text-xs text-slate-400 mt-3 leading-relaxed">
+                    <div className="text-[10px] md:text-xs text-slate-400 mt-1 md:mt-2 leading-relaxed">
                       Peringkat terbaik
                     </div>
                   </div>
                 </div>
 
                 {/* CHART */}
-                <div className="bg-white border border-slate-200 rounded-3xl shadow-sm overflow-hidden min-h-[340px]">
-                  <div style={{ padding: '20px 32px' }} className="border-b border-slate-100 flex justify-between items-center gap-4">
-                    <span className="font-bold text-slate-800 text-[15px] tracking-wide">📈 Perkembangan Skor</span>
-                    <div className="flex bg-slate-100 p-1.5 rounded-xl shrink-0 ">
-                      <button className={`px-3 py-1 text-xs font-semibold rounded-md transition-colors ${chartMode === "skor" ? "bg-white text-teal-600 shadow-sm" : "text-slate-500 hover:text-slate-700"}`} onClick={() => setChartMode("skor")}>Skor IRT</button>
-                      <button className={`px-3 py-1 text-xs font-semibold rounded-md transition-colors ${chartMode === "persen" ? "bg-white text-teal-600 shadow-sm" : "text-slate-500 hover:text-slate-700"}`} onClick={() => setChartMode("persen")}>Persen</button>
+                <div className="bg-white border border-slate-200 rounded-2xl md:rounded-3xl shadow-sm overflow-hidden min-h-[260px]">
+                  <div className="p-4 md:p-5 border-b border-slate-100 flex justify-between items-center gap-4">
+                    <span className="font-bold text-slate-800 text-[14px] md:text-[15px] tracking-wide">📈 Perkembangan Skor</span>
+                    <div className="flex bg-slate-100 p-1 md:p-1.5 rounded-xl shrink-0 ">
+                      <button className={`px-2.5 py-1 text-[11px] md:text-xs font-semibold rounded-md transition-colors ${chartMode === "skor" ? "bg-white text-teal-600 shadow-sm" : "text-slate-500 hover:text-slate-700"}`} onClick={() => setChartMode("skor")}>Skor IRT</button>
+                      <button className={`px-2.5 py-1 text-[11px] md:text-xs font-semibold rounded-md transition-colors ${chartMode === "persen" ? "bg-white text-teal-600 shadow-sm" : "text-slate-500 hover:text-slate-700"}`} onClick={() => setChartMode("persen")}>Persen</button>
                     </div>
                   </div>
-                  <div className="h-64 px-5 pb-5 pt-3">
+                  <div className="h-48 md:h-56 px-3 md:px-5 pb-3 md:pb-5 pt-2 md:pt-3">
                     {loading ? (
                       <div className="w-full h-full flex items-center justify-center text-slate-400 text-sm">Memuat data...</div>
                     ) : chartData.length > 0 ? (
@@ -633,10 +629,10 @@ export default function DashboardLayout() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* RADAR */}
                   <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden flex flex-col">
-                    <div style={{ padding: '16px 24px' }} className="border-b border-slate-100"><span className="font-bold text-slate-800">🕸 Peta Kemampuan</span></div>
-                    <div style={{ padding: '16px 24px' }} className="flex-1 p-4 min-h-[250px]">
+                    <div className="p-4 md:p-5 border-b border-slate-100"><span className="font-bold text-slate-800 text-[14px] md:text-[15px]">🕸 Peta Kemampuan</span></div>
+                    <div className="flex-1 p-3 md:p-4 min-h-[200px]">
                       <ResponsiveContainer width="100%" height="100%">
-                        <RadarChart cx="50%" cy="50%" outerRadius="70%" data={radarData}>
+                        <RadarChart cx="50%" cy="50%" outerRadius="65%" data={radarData}>
                           <PolarGrid stroke="#e5e7eb" />
                           <PolarAngleAxis dataKey="subject" tick={{ fill: '#4b5563', fontSize: 10, fontWeight: 600 }} />
                           <PolarRadiusAxis angle={30} domain={[0, 100]} tick={false} axisLine={false} />
@@ -653,9 +649,9 @@ export default function DashboardLayout() {
 
                   {/* PERFORMA MAPEL */}
                   <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden flex flex-col">
-                    <div style={{ padding: '16px 24px' }} className="border-b border-slate-100"><span className="font-bold text-slate-800">🎯 Performa Mapel</span></div>
-                    <div style={{ padding: '16px 24px' }} className="flex-1">
-                      <div className="flex flex-wrap gap-2 mb-4">
+                    <div className="p-4 md:p-5 border-b border-slate-100"><span className="font-bold text-slate-800 text-[14px] md:text-[15px]">🎯 Performa Mapel</span></div>
+                    <div className="flex-1 p-4 md:p-5">
+                      <div className="flex flex-wrap gap-1.5 md:gap-2 mb-4">
                         {["semua", "matematika", "b.indo", "b.inggris", "fisika", "kimia", "biologi"].map(p => (
                           <button key={p} className={`px-3 py-1 text-xs font-semibold rounded-full border ${activePill === p ? "bg-teal-50 border-teal-200 text-teal-700" : "bg-white border-slate-200 text-slate-500 hover:bg-slate-50"}`} onClick={() => setActivePill(p)}>
                             {p === "semua" ? "Semua" : p === "b.indo" ? "B. Indo" : p === "b.inggris" ? "B. Inggris" : p.charAt(0).toUpperCase() + p.slice(1)}
@@ -692,11 +688,11 @@ export default function DashboardLayout() {
         <aside className="hidden lg:block lg:col-span-4 sticky top-8 h-fit border-l border-slate-200 pl-7 space-y-4">
 
           {/* Kartu Premium */}
-          <div className="bg-white border border-slate-200 rounded-2xl flex flex-col gap-4" style={{ padding: '24px' }}>
+          <div className="bg-white border border-slate-200 rounded-2xl flex flex-col gap-3 md:gap-4 p-4 md:p-5">
 
             {/* Header */}
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-amber-50 flex items-center justify-center shrink-0">
+              <div className="w-8 h-8 md:w-9 md:h-9 rounded-xl bg-amber-50 flex items-center justify-center shrink-0">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-amber-600" viewBox="0 0 20 20" fill="currentColor">
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
@@ -731,23 +727,23 @@ export default function DashboardLayout() {
               <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
               </svg>
-              Upgrade Sekarangg
+              Upgrade Sekarang
             </button>
 
           </div>
 
           {/* Runtutan / Timeline Aktivitas */}
-          <div className="bg-white border border-slate-200 rounded-2xl shadow-sm" style={{ padding: '20px' }}>
+          <div className="bg-white border border-slate-200 rounded-2xl shadow-sm p-4">
 
             {/* Header */}
-            <div className="flex items-center justify-between mb-5">
-              <h3 className="font-bold text-slate-800 text-[15px] flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="font-bold text-slate-800 text-[14px] flex items-center gap-2">
+                <div className="w-7 h-7 rounded-lg bg-slate-100 flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
-                Aktivitas Terkini
+                Aktivitas
               </h3>
 
               {/* UBAH: plain text → pill badge */}
