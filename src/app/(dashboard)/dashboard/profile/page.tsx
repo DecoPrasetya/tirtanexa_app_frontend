@@ -12,9 +12,9 @@ import {
   Save,
   Moon,
   Sun,
-  Route,
-  Link
+  Route
 } from "lucide-react";
+import Link from "next/link";
 import { useAuthStore } from "@/lib/auth-store";
 import Card from "@/components/ui/Card";
 import Badge from "@/components/ui/Badge";
