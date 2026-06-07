@@ -185,15 +185,14 @@ export default function AdminSubjectsPage() {
 
                 <div className="flex-1"></div>
 
-                {/* CHAPTER */}
                 <div className="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between">
 
                   <p className="text-sm text-[var(--text-muted)]">
                     {s._count?.chapters || 0} bab
                   </p>
 
-                  <Link href={`/belajar/${s.name.toLowerCase().replace(/\s+/g, '-')}`} className="text-sm font-semibold text-teal-600 hover:text-teal-700 transition-colors bg-transparent border-none" style={{ textDecoration: "none", cursor: "pointer" }}>
-                    Lihat →
+                  <Link href={`/dashboard/admin/subjects/${s.id}`} className="text-sm font-semibold text-teal-600 hover:text-teal-700 transition-colors bg-transparent border-none" style={{ textDecoration: "none", cursor: "pointer" }}>
+                    Kelola Bab →
                   </Link>
                 </div>
 

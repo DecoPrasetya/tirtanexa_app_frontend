@@ -27,35 +27,7 @@ const initialSubtests = [
   { id: "7", title: "Penalaran Matematika", duration: "30 menit 30 soal" },
 ];
 
-const dummyTryouts: TryoutData[] = [
-  {
-    id: "1",
-    type: "SNBT Reguler",
-    title: "TryOut SNBT 1 2026",
-    duration: 195,
-    questions: 155,
-    system: "IRT (Bobot Beda)",
-    description: "Uji kemampuanmu dengan simulasi SNBT terbaru. Pastikan koneksi internet stabil.",
-  },
-  {
-    id: "2",
-    type: "SNBT Reguler",
-    title: "TryOut SNBT 2 2026",
-    duration: 195,
-    questions: 155,
-    system: "IRT (Bobot Beda)",
-    description: "Uji kemampuanmu dengan simulasi SNBT terbaru. Pastikan koneksi internet stabil.",
-  },
-  {
-    id: "3",
-    type: "SNBT Reguler",
-    title: "TryOut SNBT 3 2026",
-    duration: 195,
-    questions: 155,
-    system: "IRT (Bobot Beda)",
-    description: "Uji kemampuanmu dengan simulasi SNBT terbaru. Pastikan koneksi internet stabil.",
-  }
-];
+const dummyTryouts: TryoutData[] = [];
 
 export default function HalamanDetailTryout({ params }: PageProps) {
   const unwrappedParams = use(params);

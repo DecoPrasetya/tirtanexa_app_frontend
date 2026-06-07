@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
 @import "tailwindcss";
 
 /* ============ BRAND DESIGN TOKENS ============ */
@@ -90,7 +90,8 @@
   --color-warning: var(--warning);
   --color-error: var(--error);
   --color-info: var(--info);
-  --font-sans: 'Poppins', system-ui, sans-serif;
+  --font-nunito: var(--font-nunito);
+  --font-sans: var(--font-nunito), system-ui, sans-serif;
 }
 
 @layer base {
@@ -108,7 +109,7 @@
   }
 
   body {
-    font-family: 'Poppins', system-ui, sans-serif;
+    font-family: var(--font-nunito), system-ui, sans-serif;
     background: var(--bg);
     color: var(--text);
     line-height: 1.6;

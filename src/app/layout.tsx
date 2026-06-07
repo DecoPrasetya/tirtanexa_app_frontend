@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Nunito } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 
@@ -10,21 +11,27 @@ export const metadata: Metadata = {
   authors: [{ name: "Tirtanexa" }],
 };
 
+const nunito = Nunito({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-nunito",
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id" className="h-full">
-      <body className="min-h-full antialiased">
+    <html lang="id" className={`h-full ${nunito.variable}`}>
+      <body className="min-h-full antialiased font-nunito">
         {children}
         <Toaster
           position="top-right"
           toastOptions={{
             duration: 4000,
             style: {
-              fontFamily: "'Poppins', sans-serif",
+              fontFamily: "var(--font-nunito), sans-serif",
               fontSize: "14px",
               borderRadius: "12px",
               padding: "12px 16px",

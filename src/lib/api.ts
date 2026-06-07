@@ -29,6 +29,7 @@ async function request<T>(
   }
 
   const res = await fetch(`${BASE_URL}${endpoint}`, {
+    cache: "no-store",
     ...options,
     headers,
   });
@@ -83,6 +84,13 @@ export const api = {
       request<import("./types").Chapter[]>(`/subjects/${subjectId}/chapters`),
     getChapter: (chapterId: string) =>
       request<import("./types").Chapter>(`/chapters/${chapterId}`),
+    createChapter: (subjectId: string, data: { name: string; code: string; description?: string }) =>
+      request<import("./types").Chapter>(`/subjects/${subjectId}/chapters`, {
+        method: "POST",
+        body: JSON.stringify(data),
+      }),
+    deleteChapter: (chapterId: string) =>
+      request<void>(`/chapters/${chapterId}`, { method: "DELETE" }),
   },
 
   /* ============ QUESTIONS ============ */

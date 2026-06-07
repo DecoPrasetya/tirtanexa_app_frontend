@@ -1,51 +1,226 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { ClipboardList, Search, Trash2 } from "lucide-react";
+import {
+  Layers,
+  BookOpen,
+  ChevronDown,
+  BrainCircuit,
+  Calculator,
+  Landmark,
+  FlaskConical,
+  FolderOpen
+} from "lucide-react";
+
 import Card from "@/components/ui/Card";
 import Badge from "@/components/ui/Badge";
-import Input from "@/components/ui/Input";
 import { api } from "@/lib/api";
-import type { Question } from "@/lib/types";
-import toast from "react-hot-toast";
+import type { Subject } from "@/lib/types";
 
 export default function AdminQuestionsPage() {
-  const [questions, setQuestions] = useState<Question[]>([]);
+  const [subjects, setSubjects] = useState<Subject[]>([]);
   const [loading, setLoading] = useState(true);
-  const [search, setSearch] = useState("");
+
+  const [selectedCategory, setSelectedCategory] = useState("UTBK");
+  const [openDropdown, setOpenDropdown] = useState(false);
 
   useEffect(() => {
-    api.questions.getAll().then((d) => setQuestions(Array.isArray(d) ? d : [])).catch(() => {}).finally(() => setLoading(false));
+    api.subjects
+      .getAll()
+      .then((d) => setSubjects(Array.isArray(d) ? d : []))
+      .catch(() => { })
+      .finally(() => setLoading(false));
   }, []);
 
-  const filtered = questions.filter((q) => q.content.toLowerCase().includes(search.toLowerCase()));
-  const diffBadge = { EASY: "success" as const, MEDIUM: "warning" as const, HARD: "error" as const };
+  const categories = ["UTBK", "SMA", "SMP", "SD"];
 
-  const handleDelete = async (id: string) => {
-    if (!confirm("Hapus soal ini?")) return;
-    try {
-      await api.questions.delete(id);
-      setQuestions((p) => p.filter((q) => q.id !== id));
-      toast.success("Dihapus");
-    } catch (e: unknown) { toast.error(e instanceof Error ? e.message : "Gagal"); }
+  const filteredSubjects = subjects.filter(
+    (s) => s.category === selectedCategory
+  );
+
+  const catBadge = {
+    UTBK: "orange" as const,
+    SD: "success" as const,
+    SMP: "info" as const,
+    SMA: "teal" as const,
+  };
+
+  const getIcon = (name: string) => {
+    if (name.toLowerCase().includes("mat")) {
+      return <Calculator className="w-6 h-6 text-violet-500" />;
+    }
+
+    if (name.toLowerCase().includes("bahasa")) {
+      return <BookOpen className="w-6 h-6 text-violet-500" />;
+    }
+
+    if (name.toLowerCase().includes("sejarah")) {
+      return <Landmark className="w-6 h-6 text-violet-500" />;
+    }
+
+    if (
+      name.toLowerCase().includes("fisika") ||
+      name.toLowerCase().includes("kimia") ||
+      name.toLowerCase().includes("biologi")
+    ) {
+      return <FlaskConical className="w-6 h-6 text-violet-500" />;
+    }
+
+    return <BrainCircuit className="w-6 h-6 text-violet-500" />;
   };
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-[var(--text)]">Bank Soal (Admin)</h1>
-      <div className="max-w-sm"><Input placeholder="Cari..." value={search} onChange={(e) => setSearch(e.target.value)} leftIcon={<Search size={18}/>}/></div>
-      {loading ? <div className="space-y-3">{Array.from({length:5}).map((_,i) => <div key={i} className="h-16 rounded-xl animate-shimmer"/>)}</div> : filtered.length ? (
-        <Card padding="none"><div className="divide-y divide-[var(--border)]">
-          {filtered.map((q, i) => (
-            <div key={q.id} className="flex items-center gap-4 px-6 py-3">
-              <span className="w-8 h-8 rounded-lg bg-[var(--teal-50)] text-[var(--teal)] flex items-center justify-center text-xs font-bold">{i+1}</span>
-              <div className="flex-1 min-w-0"><p className="text-sm text-[var(--text)] line-clamp-1">{q.content}</p><Badge variant={diffBadge[q.difficulty]} size="sm">{q.difficulty}</Badge></div>
-              <button onClick={() => handleDelete(q.id)} className="p-2 rounded-lg text-[var(--text-muted)] hover:text-[var(--error)] hover:bg-[var(--error-bg)] cursor-pointer"><Trash2 size={16}/></button>
+    <div className="space-y-8" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+
+      {/* HEADER */}
+      <div>
+        <h1 className="text-2xl font-bold text-[var(--text)] mb-2">Bank Soal</h1>
+        <p className="text-sm text-[var(--text-muted)] mb-6">Pilih mata pelajaran untuk melihat daftar soal.</p>
+        
+        {/* DROPDOWN */}
+        <div className="relative inline-block mb-5" style={{ position: "relative", display: "inline-block" }}>
+
+          <button
+            onClick={() => setOpenDropdown(!openDropdown)}
+            className="flex items-center gap-2 bg-transparent border-none p-0 cursor-pointer"
+            style={{ display: "flex", alignItems: "center", gap: "10px", background: "transparent", border: "none", padding: 0, cursor: "pointer" }}
+          >
+            <h2 className="text-xl font-bold text-[var(--text)] tracking-tight" style={{ fontSize: "24px", fontWeight: 800, color: "var(--text)", margin: 0, letterSpacing: "-0.01em" }}>
+              Kategori: {selectedCategory}
+            </h2>
+
+            <ChevronDown
+              className={`w-6 h-6 text-[var(--text-muted)] transition-transform duration-300 ${openDropdown ? "rotate-180" : ""}`}
+              style={{ width: "26px", height: "26px", color: "var(--text-muted)", transition: "transform 0.3s ease", transform: openDropdown ? "rotate(180deg)" : "rotate(0deg)" }}
+            />
+          </button>
+
+          {/* MENU */}
+          {openDropdown && (
+            <div className="absolute top-full left-0 mt-2 w-48 rounded-2xl bg-white border border-slate-200 shadow-xl p-2 z-50"
+              style={{ position: "absolute", top: "100%", left: 0, marginTop: "12px", width: "200px", borderRadius: "16px", backgroundColor: "#ffffff", border: "1px solid #e2e8f0", boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)", padding: "8px", zIndex: 50 }}>
+
+              <div className="flex flex-col space-y-1" style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                {categories.map((cat) => (
+
+                  <button
+                    key={cat}
+                    onClick={() => {
+                      setSelectedCategory(cat);
+                      setOpenDropdown(false);
+                    }}
+                    className={`w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 border-none cursor-pointer ${selectedCategory === cat
+                      ? "bg-teal-50 text-teal-700"
+                      : "bg-transparent hover:bg-slate-50 text-slate-700"
+                      }`}
+                    style={{ width: "100%", textAlign: "left", padding: "10px 16px", borderRadius: "12px", fontSize: "15px", fontWeight: 600, border: "none", cursor: "pointer", transition: "all 0.2s", backgroundColor: selectedCategory === cat ? "#f0fdfa" : "transparent", color: selectedCategory === cat ? "#0f766e" : "#334155" }}
+                  >
+                    {cat}
+                  </button>
+
+                ))}
+              </div>
             </div>
+          )}
+        </div>
+      </div>
+
+      {/* CONTENT */}
+      {loading ? (
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <div
+              key={i}
+              className="h-32 rounded-3xl animate-pulse bg-slate-100"
+            />
           ))}
-        </div></Card>
-      ) : <Card padding="lg" className="text-center py-16"><ClipboardList size={48} className="mx-auto text-[var(--text-muted)] mb-4"/><p className="text-[var(--text-muted)]">Tidak ada soal</p></Card>}
+        </div>
+
+      ) : filteredSubjects.length ? (
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          {filteredSubjects.map((s, i) => (
+
+            <motion.div
+              key={s.id}
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.05 }}
+              className="h-full"
+            >
+
+              <Card
+                padding="none"
+                style={{ padding: "20px" }}
+                className="rounded-3xl border border-teal-500 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 h-full flex flex-col"
+              >
+
+                <div className="flex items-start justify-between mb-5">
+
+                  {/* ICON */}
+                  <div className="w-14 h-14 rounded-2xl bg-violet-50 flex items-center justify-center shrink-0">
+                    {getIcon(s.name)}
+                  </div>
+
+                  {/* BADGE */}
+                  <Badge
+                    variant={catBadge[s.category as keyof typeof catBadge] || "default"}
+                    size="sm"
+                  >
+                    {s.category}
+                  </Badge>
+                </div>
+
+                {/* TITLE */}
+                <h3 className="text-[17px] font-bold text-[var(--text)] mb-1 leading-tight line-clamp-2">
+                  {s.name}
+                </h3>
+
+                {/* CODE */}
+                <p className="text-sm text-[var(--text-muted)]">
+                  Kode: {s.code}
+                </p>
+
+                <div className="flex-1"></div>
+
+                <div className="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between">
+                  <p className="text-sm text-[var(--text-muted)] flex items-center gap-1">
+                    <FolderOpen size={16} /> {s._count?.chapters || 0} bab
+                  </p>
+
+                  <Link href={`/dashboard/admin/questions/${s.id}`} className="text-sm font-semibold text-teal-600 hover:text-teal-700 transition-colors bg-transparent border-none" style={{ textDecoration: "none", cursor: "pointer" }}>
+                    Buka Folder →
+                  </Link>
+                </div>
+
+              </Card>
+            </motion.div>
+
+          ))}
+        </div>
+
+      ) : (
+
+        <Card
+          padding="none"
+          style={{ padding: "40px" }}
+          className="rounded-3xl text-center py-20"
+        >
+          <Layers
+            size={52}
+            className="mx-auto text-[var(--text-muted)] mb-5"
+          />
+
+          <p className="text-[var(--text-muted)] text-lg">
+            Belum ada mata pelajaran
+          </p>
+        </Card>
+
+      )}
     </div>
   );
 }

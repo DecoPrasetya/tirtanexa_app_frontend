@@ -1,23 +1,26 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { ArrowLeft, Plus, Trash2, Save } from "lucide-react";
+import { Suspense, useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { ArrowLeft, Save } from "lucide-react";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
-import Input from "@/components/ui/Input";
 import { api } from "@/lib/api";
 import type { Subject, Chapter } from "@/lib/types";
 import toast from "react-hot-toast";
 
 interface OptionInput { label: string; content: string; isCorrect: boolean; }
 
-export default function CreateQuestionPage() {
+function CreateQuestionForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const initialSubjectId = searchParams.get("subjectId") || "";
+  const initialChapterId = searchParams.get("chapterId") || "";
+
   const [subjects, setSubjects] = useState<Subject[]>([]);
   const [chapters, setChapters] = useState<Chapter[]>([]);
-  const [subjectId, setSubjectId] = useState("");
-  const [chapterId, setChapterId] = useState("");
+  const [subjectId, setSubjectId] = useState(initialSubjectId);
+  const [chapterId, setChapterId] = useState(initialChapterId);
   const [content, setContent] = useState("");
   const [explanation, setExplanation] = useState("");
   const [difficulty, setDifficulty] = useState("MEDIUM");
@@ -53,7 +56,11 @@ export default function CreateQuestionPage() {
         options: options.filter((o) => o.content.trim()).map((o, i) => ({ ...o, order: i })) as any,
       });
       toast.success("Soal berhasil dibuat!");
-      router.push("/dashboard/teacher/questions");
+      if (initialSubjectId && initialChapterId) {
+        router.push(`/dashboard/admin/questions/${initialSubjectId}/${initialChapterId}`);
+      } else {
+        router.push("/dashboard/admin/questions");
+      }
     } catch (e: unknown) {
       toast.error(e instanceof Error ? e.message : "Gagal menyimpan");
     } finally { setSaving(false); }
@@ -63,7 +70,7 @@ export default function CreateQuestionPage() {
     <div className="max-w-3xl mx-auto space-y-6">
       <div className="flex items-center gap-3">
         <button onClick={() => router.back()} className="p-2 rounded-lg text-[var(--text-muted)] hover:bg-[var(--bg)] cursor-pointer"><ArrowLeft size={20}/></button>
-        <h1 className="text-2xl font-bold text-[var(--text)]">Buat Soal Baru</h1>
+        <h1 className="text-2xl font-bold text-[var(--text)]">Buat Soal Baru (Admin)</h1>
       </div>
 
       <Card padding="lg" className="space-y-5">
@@ -126,5 +133,13 @@ export default function CreateQuestionPage() {
         <Button fullWidth size="lg" isLoading={saving} leftIcon={<Save size={18}/>} onClick={handleSubmit}>Simpan Soal</Button>
       </Card>
     </div>
+  );
+}
+
+export default function AdminCreateQuestionPage() {
+  return (
+    <Suspense fallback={<div className="p-8 text-center text-slate-500">Memuat...</div>}>
+      <CreateQuestionForm />
+    </Suspense>
   );
 }

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { BookOpen, ChevronRight, Layers, Search } from "lucide-react";
+import { BookOpen, ChevronRight, Layers, Search, Target, Book, GraduationCap, Library } from "lucide-react";
 import Card from "@/components/ui/Card";
 import Badge from "@/components/ui/Badge";
 import Input from "@/components/ui/Input";
@@ -17,11 +17,11 @@ const categoryColors: Record<Category, "teal" | "orange" | "info" | "success"> =
   SMA: "teal",
 };
 
-const categoryIcons: Record<Category, string> = {
-  UTBK: "🎯",
-  SD: "📚",
-  SMP: "📖",
-  SMA: "🎓",
+const categoryIcons: Record<Category, React.ReactNode> = {
+  UTBK: <Target size={24} className="text-orange-600" />,
+  SD: <Library size={24} className="text-green-600" />,
+  SMP: <Book size={24} className="text-blue-600" />,
+  SMA: <GraduationCap size={24} className="text-teal-600" />,
 };
 
 export default function SubjectsPage() {

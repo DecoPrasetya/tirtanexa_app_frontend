@@ -9,6 +9,7 @@ import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer,
   Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis
 } from "recharts";
+import { Hand, PenTool, Trophy, Rocket, PlayCircle, BookOpen, Calculator, BookText, Globe, Hash, ClipboardList, BarChart2, Medal, TrendingUp, Hexagon, Target, Zap, Beaker, Leaf, Book } from "lucide-react";
 
 export default function DashboardLayout() {
   const { user } = useAuthStore();
@@ -77,35 +78,19 @@ export default function DashboardLayout() {
 
   // Performa Mapel
   const mapelData = [
-    { icon: "📐", name: "Matematika", val: 0 },
-    { icon: "📖", name: "B. Indonesia", val: 0 },
-    { icon: "🌐", name: "B. Inggris", val: 0 },
-    { icon: "⚡", name: "Fisika", val: 0, warn: true },
-    { icon: "🧪", name: "Kimia", val: 0, warn: true },
-    { icon: "🌿", name: "Biologi", val: 0 },
+    { icon: <Calculator size={16}/>, name: "Matematika", val: 0 },
+    { icon: <Book size={16}/>, name: "B. Indonesia", val: 0 },
+    { icon: <Globe size={16}/>, name: "B. Inggris", val: 0 },
+    { icon: <Zap size={16}/>, name: "Fisika", val: 0, warn: true },
+    { icon: <Beaker size={16}/>, name: "Kimia", val: 0, warn: true },
+    { icon: <Leaf size={16}/>, name: "Biologi", val: 0 },
   ];
 
   // Tryout Yang Tersedia (Mock Data)
-  const availableTryouts = [
-    { id: 1, type: "TRYOUT AKBAR 2026", title: "PART 1", date: "25 Mei - 10 Juni 2026" },
-    { id: 2, type: "TRYOUT AKBAR 2026", title: "PART 2", date: "25 Juni - 10 Juli 2026" },
-    { id: 3, type: "TRYOUT AKBAR 2026", title: "PART 3", date: "25 Juli - 10 Agustus 2026" },
-    { id: 4, type: "TRYOUT AKBAR 2026", title: "PART 4", date: "25 Agustus - 10 September 2026" },
-    { id: 5, type: "TRYOUT AKBAR 2026", title: "PART 5", date: "25 September - 10 Oktober 2026" },
-    { id: 6, type: "TRYOUT AKBAR 2026", title: "PART 6", date: "25 Oktober - 10 November 2026" },
-  ];
+  const availableTryouts: any[] = [];
 
   // Lanjutkan Pembelajaran (Mock Data)
-  const learningProgress = [
-    {
-      id: 1,
-      category: "UTBK SNBT",
-      status: "100% Selesai",
-      title: "Penalaran Umum",
-      subtitle: "Bab 4: Penalaran Induktif & Deduktif",
-      progress: 100
-    }
-  ];
+  const learningProgress: any[] = [];
 
   const jalurList = [
     {
@@ -148,7 +133,7 @@ export default function DashboardLayout() {
 
           {/* Header Sapaan */}
           <div>
-            <h1 className="text-3xl font-bold text-slate-900">Halo, {dpName.split(" ")[0]}! 👋</h1>
+            <h1 className="text-3xl font-bold text-slate-900 flex items-center gap-2">Halo, {dpName.split(" ")[0]}! <Hand className="text-yellow-500" size={32} /></h1>
             <div className="relative mt-1 w-[320px]">
 
               {/* BUTTON */}
@@ -265,13 +250,13 @@ export default function DashboardLayout() {
                     href="/dashboard/exams/practice"
                     className="bg-gradient-to-br from-teal-500 to-teal-600 text-white px-4 py-5 md:py-6 rounded-3xl shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all flex flex-col items-center justify-center text-center gap-3 relative overflow-hidden group min-h-[120px]">
                     {/* Icon background (pojok kanan atas) */}
-                    <div className="absolute -right-2 -top-2 text-7xl opacity-10 group-hover:scale-110 transition-transform duration-300 pointer-events-none">
-                      ✏️
+                    <div className="absolute -right-2 -top-2 opacity-10 group-hover:scale-110 transition-transform duration-300 pointer-events-none text-white">
+                      <PenTool size={90} strokeWidth={1.5} />
                     </div>
 
                     {/* Icon utama */}
-                    <div className="bg-white/20 p-3 rounded-2xl backdrop-blur-md shadow-inner relative z-10">
-                      <span className="text-2xl md:text-3xl leading-none block">✏️</span>
+                    <div className="bg-white/20 p-3 rounded-2xl backdrop-blur-md shadow-inner relative z-10 text-white flex items-center justify-center">
+                      <PenTool size={32} />
                     </div>
 
                     {/* Text */}
@@ -288,13 +273,13 @@ export default function DashboardLayout() {
                     href="/dashboard/tournaments"
                     className="bg-gradient-to-br from-indigo-500 to-indigo-600 text-white px-4 py-5 md:py-6 rounded-3xl shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all flex flex-col items-center justify-center text-center gap-3 relative overflow-hidden group min-h-[120px]">
                     {/* Icon background (pojok kanan atas) */}
-                    <div className="absolute -right-2 -top-2 text-7xl opacity-10 group-hover:scale-110 transition-transform duration-300 pointer-events-none">
-                      🏆
+                    <div className="absolute -right-2 -top-2 opacity-10 group-hover:scale-110 transition-transform duration-300 pointer-events-none text-white">
+                      <Trophy size={90} strokeWidth={1.5} />
                     </div>
 
                     {/* Icon utama */}
-                    <div className="bg-white/20 p-3 rounded-2xl backdrop-blur-md shadow-inner relative z-10">
-                      <span className="text-2xl md:text-3xl leading-none block">🏆</span>
+                    <div className="bg-white/20 p-3 rounded-2xl backdrop-blur-md shadow-inner relative z-10 text-white flex items-center justify-center">
+                      <Trophy size={32} />
                     </div>
 
                     {/* Text */}
@@ -311,7 +296,7 @@ export default function DashboardLayout() {
 
                 <div className="flex flex-col gap-4">
                   <h3 className="font-bold text-lg text-slate-800 flex items-center gap-2">
-                    <span className="text-2xl">🚀</span> Tryout yang tersedia
+                    <span className="text-teal-600"><Rocket size={24} /></span> Tryout yang tersedia
                   </h3>
                   <div className="flex flex-col gap-4">
                     {availableTryouts.slice(0, 5).map((tryout) => (
@@ -404,7 +389,7 @@ export default function DashboardLayout() {
               <div className="flex flex-col gap-8 pt-2 pb-20">
                 <div className="flex flex-col gap-4">
                   <h3 className="font-bold text-lg text-slate-800 flex items-center gap-2">
-                    <span className="text-2xl">🚀</span> Lanjutkan Pembelajarann
+                    <span className="text-teal-600"><Rocket size={24} /></span> Lanjutkan Pembelajaran
                   </h3>
                   <div className="flex flex-col gap-4">
                     {learningProgress.map((item) => (
@@ -413,14 +398,14 @@ export default function DashboardLayout() {
                         className="w-full bg-gradient-to-r from-teal-500 to-teal-400 text-white rounded-3xl shadow-sm flex flex-row items-stretch gap-3 md:gap-4 relative overflow-hidden group cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all min-h-[110px]"
                       >
                         {/* Background Icon */}
-                        <div className="absolute right-2 top-2 text-6xl opacity-10 group-hover:scale-110 group-hover:rotate-12 transition-transform duration-500 pointer-events-none">
-                          ▶
+                        <div className="absolute right-2 top-2 opacity-10 group-hover:scale-110 group-hover:rotate-12 transition-transform duration-500 pointer-events-none text-white">
+                          <PlayCircle size={70} strokeWidth={1.5} />
                         </div>
 
                         {/* Icon (Left Panel) */}
-                        <div className="bg-teal-600 w-16 md:w-20 flex-shrink-0 flex items-center justify-center shadow-md py-4 md:py-0 transition-all duration-300 group-hover:bg-teal-700">
-                          <span className="text-2xl md:text-3xl leading-none transition-transform duration-300 group-hover:scale-110">
-                            ▶
+                        <div className="bg-teal-600 w-16 md:w-20 flex-shrink-0 flex items-center justify-center shadow-md py-4 md:py-0 transition-all duration-300 group-hover:bg-teal-700 text-white">
+                          <span className="transition-transform duration-300 group-hover:scale-110">
+                            <PlayCircle size={32} />
                           </span>
                         </div>
 
@@ -471,7 +456,7 @@ export default function DashboardLayout() {
 
                 <div className="flex justify-between items-center">
                   <h3 className="font-bold text-lg text-slate-800 flex items-center gap-2">
-                    <span className="text-2xl">📚</span> Materi Pembelajaran
+                    <span className="text-teal-600"><BookOpen size={24} /></span> Materi Pembelajaran
                   </h3>
                   <Link href="dashboard/admin/subjects" className="text-sm font-semibold text-teal-600 bg-teal-50 hover:bg-teal-100 rounded-full px-4 py-1.5 transition-colors">
                     Lihat Semua →
@@ -479,10 +464,10 @@ export default function DashboardLayout() {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {[
-                    { title: 'Penalaran Umum', desc: 'Aritmatika, Aljabar, Geometri', icon: '📐', progress: 45, color: 'bg-blue-500', light: 'bg-blue-50', text: 'text-blue-600', href: '/belajar/penalaran-umum' },
-                    { title: 'Literasi B. Indonesia', desc: 'Pemahaman teks & Argumentasi', icon: '📝', progress: 20, color: 'bg-rose-500', light: 'bg-rose-50', text: 'text-rose-600', href: '/belajar/bahasa-indonesia' },
-                    { title: 'Literasi B. Inggris', desc: 'Reading & Vocabulary', icon: '🌐', progress: 10, color: 'bg-indigo-500', light: 'bg-indigo-50', text: 'text-indigo-600', href: '/belajar/bahasa-inggris' },
-                    { title: 'Penalaran Matematika', desc: 'Pemecahan masalah matematis', icon: '🔢', progress: 0, color: 'bg-amber-500', light: 'bg-amber-50', text: 'text-amber-600', href: '/belajar/matematika' }
+                    { title: 'Penalaran Umum', desc: 'Aritmatika, Aljabar, Geometri', icon: <Calculator size={24}/>, progress: 45, color: 'bg-blue-500', light: 'bg-blue-50', text: 'text-blue-600', href: '/belajar/penalaran-umum' },
+                    { title: 'Literasi B. Indonesia', desc: 'Pemahaman teks & Argumentasi', icon: <BookText size={24}/>, progress: 20, color: 'bg-rose-500', light: 'bg-rose-50', text: 'text-rose-600', href: '/belajar/bahasa-indonesia' },
+                    { title: 'Literasi B. Inggris', desc: 'Reading & Vocabulary', icon: <Globe size={24}/>, progress: 10, color: 'bg-indigo-500', light: 'bg-indigo-50', text: 'text-indigo-600', href: '/belajar/bahasa-inggris' },
+                    { title: 'Penalaran Matematika', desc: 'Pemecahan masalah matematis', icon: <Hash size={24}/>, progress: 0, color: 'bg-amber-500', light: 'bg-amber-50', text: 'text-amber-600', href: '/belajar/matematika' }
                   ].map((item, idx) => (
                     <Link href={item.href} key={idx} className="bg-white border border-slate-200 p-3 md:p-4 rounded-2xl shadow-sm hover:shadow-md transition-all hover:-translate-y-1 cursor-pointer group min-h-[60px] flex flex-col justify-center" style={{ textDecoration: 'none' }}>
                       <div className="flex items-center gap-3 md:gap-4 pr-2 md:pr-4">
@@ -507,8 +492,8 @@ export default function DashboardLayout() {
                 {/* STAT GRID */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
                   <div className="bg-white border border-slate-200 px-3 py-4 md:py-5 rounded-[20px] shadow-sm flex flex-col items-center justify-center text-center hover:border-teal-200 hover:shadow-md transition-all duration-300 min-h-[100px] md:min-h-[120px]">
-                    <div className="w-10 h-10 md:w-12 md:h-12 bg-teal-50 text-xl md:text-2xl rounded-xl md:rounded-2xl flex items-center justify-center mb-2 md:mb-3 shadow-sm">
-                      📋
+                    <div className="w-10 h-10 md:w-12 md:h-12 bg-teal-50 text-xl md:text-2xl rounded-xl md:rounded-2xl flex items-center justify-center mb-2 md:mb-3 shadow-sm text-teal-600">
+                      <ClipboardList size={24} />
                     </div>
 
                     <div className="text-[10px] md:text-[11px] text-slate-500 font-semibold tracking-widest uppercase mb-1 md:mb-1.5">
@@ -525,8 +510,8 @@ export default function DashboardLayout() {
                   </div>
 
                   <div className="bg-white border border-slate-200 px-3 py-4 md:py-5 rounded-[20px] shadow-sm flex flex-col items-center justify-center text-center hover:border-orange-200 hover:shadow-md transition-all duration-300 min-h-[100px] md:min-h-[120px]">
-                    <div className="w-10 h-10 md:w-12 md:h-12 bg-orange-50 text-xl md:text-2xl rounded-xl md:rounded-2xl flex items-center justify-center mb-2 md:mb-3 shadow-sm">
-                      📊
+                    <div className="w-10 h-10 md:w-12 md:h-12 bg-orange-50 text-xl md:text-2xl rounded-xl md:rounded-2xl flex items-center justify-center mb-2 md:mb-3 shadow-sm text-orange-600">
+                      <BarChart2 size={24} />
                     </div>
 
                     <div className="text-[10px] md:text-[11px] text-slate-500 font-semibold tracking-widest uppercase mb-1 md:mb-1.5">
@@ -543,8 +528,8 @@ export default function DashboardLayout() {
                   </div>
 
                   <div className="bg-white border border-slate-200 px-3 py-4 md:py-5 rounded-[20px] shadow-sm flex flex-col items-center justify-center text-center hover:border-indigo-200 hover:shadow-md transition-all duration-300 min-h-[100px] md:min-h-[120px]">
-                    <div className="w-10 h-10 md:w-12 md:h-12 bg-indigo-50 text-xl md:text-2xl rounded-xl md:rounded-2xl flex items-center justify-center mb-2 md:mb-3 shadow-sm">
-                      🥇
+                    <div className="w-10 h-10 md:w-12 md:h-12 bg-indigo-50 text-xl md:text-2xl rounded-xl md:rounded-2xl flex items-center justify-center mb-2 md:mb-3 shadow-sm text-indigo-600">
+                      <Medal size={24} />
                     </div>
 
                     <div className="text-[10px] md:text-[11px] text-slate-500 font-semibold tracking-widest uppercase mb-1 md:mb-1.5">
@@ -561,8 +546,8 @@ export default function DashboardLayout() {
                   </div>
 
                   <div className="bg-white border border-slate-200 px-3 py-4 md:py-5 rounded-[20px] shadow-sm flex flex-col items-center justify-center text-center hover:border-rose-200 hover:shadow-md transition-all duration-300 min-h-[100px] md:min-h-[120px]">
-                    <div className="w-10 h-10 md:w-12 md:h-12 bg-rose-50 text-xl md:text-2xl rounded-xl md:rounded-2xl flex items-center justify-center mb-2 md:mb-3 shadow-sm">
-                      🏆
+                    <div className="w-10 h-10 md:w-12 md:h-12 bg-rose-50 text-xl md:text-2xl rounded-xl md:rounded-2xl flex items-center justify-center mb-2 md:mb-3 shadow-sm text-rose-600">
+                      <Trophy size={24} />
                     </div>
 
                     <div className="text-[10px] md:text-[11px] text-slate-500 font-semibold tracking-widest uppercase mb-1 md:mb-1.5">
@@ -582,7 +567,7 @@ export default function DashboardLayout() {
                 {/* CHART */}
                 <div className="bg-white border border-slate-200 rounded-2xl md:rounded-3xl shadow-sm overflow-hidden min-h-[260px]">
                   <div className="p-4 md:p-5 border-b border-slate-100 flex justify-between items-center gap-4">
-                    <span className="font-bold text-slate-800 text-[14px] md:text-[15px] tracking-wide">📈 Perkembangan Skor</span>
+                    <span className="font-bold text-slate-800 text-[14px] md:text-[15px] tracking-wide flex items-center gap-2"><TrendingUp size={18} className="text-teal-600" /> Perkembangan Skor</span>
                     <div className="flex bg-slate-100 p-1 md:p-1.5 rounded-xl shrink-0 ">
                       <button className={`px-2.5 py-1 text-[11px] md:text-xs font-semibold rounded-md transition-colors ${chartMode === "skor" ? "bg-white text-teal-600 shadow-sm" : "text-slate-500 hover:text-slate-700"}`} onClick={() => setChartMode("skor")}>Skor IRT</button>
                       <button className={`px-2.5 py-1 text-[11px] md:text-xs font-semibold rounded-md transition-colors ${chartMode === "persen" ? "bg-white text-teal-600 shadow-sm" : "text-slate-500 hover:text-slate-700"}`} onClick={() => setChartMode("persen")}>Persen</button>
@@ -629,7 +614,7 @@ export default function DashboardLayout() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* RADAR */}
                   <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden flex flex-col">
-                    <div className="p-4 md:p-5 border-b border-slate-100"><span className="font-bold text-slate-800 text-[14px] md:text-[15px]">🕸 Peta Kemampuan</span></div>
+                    <div className="p-4 md:p-5 border-b border-slate-100"><span className="font-bold text-slate-800 text-[14px] md:text-[15px] flex items-center gap-2"><Hexagon size={18} className="text-teal-600"/> Peta Kemampuan</span></div>
                     <div className="flex-1 p-3 md:p-4 min-h-[200px]">
                       <ResponsiveContainer width="100%" height="100%">
                         <RadarChart cx="50%" cy="50%" outerRadius="65%" data={radarData}>
@@ -649,7 +634,7 @@ export default function DashboardLayout() {
 
                   {/* PERFORMA MAPEL */}
                   <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden flex flex-col">
-                    <div className="p-4 md:p-5 border-b border-slate-100"><span className="font-bold text-slate-800 text-[14px] md:text-[15px]">🎯 Performa Mapel</span></div>
+                    <div className="p-4 md:p-5 border-b border-slate-100"><span className="font-bold text-slate-800 text-[14px] md:text-[15px] flex items-center gap-2"><Target size={18} className="text-teal-600"/> Performa Mapel</span></div>
                     <div className="flex-1 p-4 md:p-5">
                       <div className="flex flex-wrap gap-1.5 md:gap-2 mb-4">
                         {["semua", "matematika", "b.indo", "b.inggris", "fisika", "kimia", "biologi"].map(p => (
@@ -808,8 +793,8 @@ export default function DashboardLayout() {
                         <h4 className="font-semibold text-[12.5px] text-slate-700 leading-snug">
                           Belum ada aktivitas
                         </h4>
-                        <p className="text-[11px] text-slate-400 mt-1.5 leading-none">
-                          Ayo mulai belajar hari ini 🚀
+                        <p className="text-[11px] text-slate-400 mt-1.5 leading-none flex items-center gap-1">
+                          Ayo mulai belajar hari ini <Rocket size={12} className="text-teal-500" />
                         </p>
                       </div>
                     </div>

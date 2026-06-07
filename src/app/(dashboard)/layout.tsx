@@ -3,6 +3,10 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
+import { 
+  LayoutDashboard, BookOpen, PenTool, ClipboardList, Trophy, 
+  TrendingUp, BarChart2, Users, User, X, Menu, Search, Bell, LogOut, PenSquare
+} from "lucide-react";
 import { useAuthStore } from "@/lib/auth-store";
 import "./dashboard.css"; // Import the CSS globally for dashboard routes
 import type { Role } from "@/lib/types";
@@ -10,7 +14,7 @@ import type { Role } from "@/lib/types";
 interface NavItem {
   label: string;
   href: string;
-  icon: string;
+  icon: React.ElementType;
   roles: Role[];
   badge?: string;
   section?: string;
@@ -18,30 +22,30 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   // Shared
-  { label: "Dashboard", href: "/dashboard", icon: "⊞", roles: ["STUDENT", "TEACHER", "ADMIN"], section: "Menu Utama" },
+  { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard, roles: ["STUDENT", "TEACHER", "ADMIN"], section: "Menu Utama" },
 
   // Student
-  { label: "Mata Pelajaran", href: "/dashboard/subjects", icon: "📚", roles: ["STUDENT"], section: "Menu Utama" },
-  { label: "Latihan Soal", href: "/dashboard/exams/practice", icon: "✏️", roles: ["STUDENT"], section: "Menu Utama" },
-  { label: "Tryout UTBK", href: "/dashboard/exams/tryout", icon: "📝", roles: ["STUDENT"], badge: "Live", section: "Menu Utama" },
-  { label: "Turnamen", href: "/dashboard/tournaments", icon: "🏆", roles: ["STUDENT"], section: "Komunitas" },
-  { label: "Riwayat", href: "/dashboard/history", icon: "📈", roles: ["STUDENT"], section: "Komunitas" },
+  { label: "Mata Pelajaran", href: "/dashboard/subjects", icon: BookOpen, roles: ["STUDENT"], section: "Menu Utama" },
+  { label: "Latihan Soal", href: "/dashboard/exams/practice", icon: PenTool, roles: ["STUDENT"], section: "Menu Utama" },
+  { label: "Tryout UTBK", href: "/dashboard/exams/tryout", icon: ClipboardList, roles: ["STUDENT"], badge: "Live", section: "Menu Utama" },
+  { label: "Turnamen", href: "/dashboard/tournaments", icon: Trophy, roles: ["STUDENT"], section: "Komunitas" },
+  { label: "Riwayat", href: "/dashboard/history", icon: TrendingUp, roles: ["STUDENT"], section: "Komunitas" },
 
   // Teacher
-  { label: "Bank Soal", href: "/dashboard/teacher/questions", icon: "📋", roles: ["TEACHER"], section: "Akademik" },
-  { label: "Buat Soal", href: "/dashboard/teacher/questions/create", icon: "✍️", roles: ["TEACHER"], section: "Akademik" },
-  { label: "Turnamen", href: "/dashboard/teacher/tournaments", icon: "🏆", roles: ["TEACHER"], section: "Komunitas" },
-  { label: "Statistik Siswa", href: "/dashboard/teacher/stats", icon: "📊", roles: ["TEACHER"], section: "Komunitas" },
+  { label: "Bank Soal", href: "/dashboard/teacher/questions", icon: ClipboardList, roles: ["TEACHER"], section: "Akademik" },
+  { label: "Buat Soal", href: "/dashboard/teacher/questions/create", icon: PenSquare, roles: ["TEACHER"], section: "Akademik" },
+  { label: "Turnamen", href: "/dashboard/teacher/tournaments", icon: Trophy, roles: ["TEACHER"], section: "Komunitas" },
+  { label: "Statistik Siswa", href: "/dashboard/teacher/stats", icon: BarChart2, roles: ["TEACHER"], section: "Komunitas" },
 
   // Admin
-  { label: "Manajemen User", href: "/dashboard/admin/users", icon: "👥", roles: ["ADMIN"], section: "Sistem" },
-  { label: "Bank Soal", href: "/dashboard/admin/questions", icon: "📋", roles: ["ADMIN"], section: "Sistem" },
-  { label: "Mata Pelajaran", href: "/dashboard/admin/subjects", icon: "📚", roles: ["ADMIN"], section: "Sistem" },
-  { label: "Turnamen", href: "/dashboard/admin/tournaments", icon: "🏆", roles: ["ADMIN"], section: "Sistem" },
-  { label: "Laporan Sistem", href: "/dashboard/admin/reports", icon: "📊", roles: ["ADMIN"], section: "Sistem" },
+  { label: "Manajemen User", href: "/dashboard/admin/users", icon: Users, roles: ["ADMIN"], section: "Sistem" },
+  { label: "Bank Soal", href: "/dashboard/admin/questions", icon: ClipboardList, roles: ["ADMIN"], section: "Sistem" },
+  { label: "Mata Pelajaran", href: "/dashboard/admin/subjects", icon: BookOpen, roles: ["ADMIN"], section: "Sistem" },
+  { label: "Turnamen", href: "/dashboard/admin/tournaments", icon: Trophy, roles: ["ADMIN"], section: "Sistem" },
+  { label: "Laporan Sistem", href: "/dashboard/admin/reports", icon: BarChart2, roles: ["ADMIN"], section: "Sistem" },
 
   // Profile (all)
-  { label: "Profil", href: "/dashboard/profile", icon: "👤", roles: ["STUDENT", "TEACHER", "ADMIN"], section: "Lainnya" },
+  { label: "Profil", href: "/dashboard/profile", icon: User, roles: ["STUDENT", "TEACHER", "ADMIN"], section: "Lainnya" },
 ];
 
 export default function DashboardLayout({
@@ -149,7 +153,7 @@ export default function DashboardLayout({
         <div className="sb-logo">
           <div className="lmark">T</div>
           <div className="ltxt"><strong>Tirtanexa</strong><span>Learning Platform</span></div>
-          <button className="sb-x" onClick={closeSb}>✕</button>
+          <button className="sb-x" onClick={closeSb}><X size={20} /></button>
         </div>
         <nav className="sb-nav">
           {Object.entries(sections).map(([sectionName, items]) => (
@@ -162,7 +166,7 @@ export default function DashboardLayout({
                   className={`nitem ${isActive(item.href) ? "on" : ""}`}
                   onClick={closeSb}
                 >
-                  <span className="nico">{item.icon}</span> {item.label}
+                  <span className="nico"><item.icon size={20} /></span> {item.label}
                   {item.badge && <span className="nbadge">{item.badge}</span>}
                 </Link>
               ))}
@@ -172,22 +176,22 @@ export default function DashboardLayout({
         <div className="sb-foot">
           <div className="uav">{dpInitials}</div>
           <div><span className="uname">{dpName}</span><span className="ubadge capitalize">{role.toLowerCase()}</span></div>
-          <button className="uout" onClick={doLogout}>⇥</button>
+          <button className="uout flex items-center justify-center text-[var(--text-muted)] hover:text-red-500" onClick={doLogout}><LogOut size={20} /></button>
         </div>
       </aside>
 
       {/* MAIN WRAP */}
       <div className="mainwrap flex flex-col h-screen overflow-hidden">
         {/* Mobile topbar */}
-        <header className="topbar sticky top-0 z-50 bg-white shadow-sm shrink-0 lg:hidden">
-          <button className="ham" onClick={() => setSbOpen(true)}>☰</button>
+        <header className="topbar sticky top-0 z-50 bg-white shadow-sm shrink-0 lg:hidden flex items-center">
+          <button className="ham flex items-center justify-center" onClick={() => setSbOpen(true)}><Menu size={24} /></button>
           <div className="tbar-brand">
             <div className="lmark">T</div>
             <span>Tirtanexa</span>
           </div>
-          <div className="tbar-r">
-            <button className="icobtn" onClick={() => setSearchOpen(true)}>🔍</button>
-            <button className="icobtn">🔔</button>
+          <div className="tbar-r flex items-center">
+            <button className="icobtn flex items-center justify-center" onClick={() => setSearchOpen(true)}><Search size={20} /></button>
+            <button className="icobtn flex items-center justify-center"><Bell size={20} /></button>
             <div className="tav">{dpInitials}</div>
           </div>
         </header>
@@ -195,9 +199,9 @@ export default function DashboardLayout({
         {/* Desktop topbar */}
         <div className="dtopbar hidden lg:flex sticky top-0 z-50 bg-[#f5f7fa]/95 backdrop-blur-md shrink-0 py-3 border-b border-slate-200/50">
           <span className="dtitle">Dashboard</span>
-          <div className="dsearch"><span style={{color:"var(--gray-400)", fontSize:"13px"}}>🔍</span><input placeholder="Cari soal, materi..." /></div>
+          <div className="dsearch"><span style={{color:"var(--gray-400)"}}><Search size={16} /></span><input placeholder="Cari soal, materi..." /></div>
           <div style={{display:"flex", gap:"8px", alignItems:"center"}}>
-            <button className="icobtn">🔔</button>
+            <button className="icobtn flex items-center justify-center"><Bell size={20} /></button>
             <div className="tav">{dpInitials}</div>
           </div>
         </div>
@@ -216,7 +220,7 @@ export default function DashboardLayout({
                 href={item.href} 
                 className={`bnitem ${isActive(item.href) ? "on" : ""}`}
               >
-                <div className="bniw">{item.icon}</div>
+                <div className="bniw flex items-center justify-center"><item.icon size={20} /></div>
                 <span>{item.label.split(" ")[0]}</span>
                 {item.badge && <div className="bndot"></div>}
               </Link>

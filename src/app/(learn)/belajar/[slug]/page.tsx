@@ -4,55 +4,9 @@ import { useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { ChevronLeft, ChevronRight, Menu, Search, User } from "lucide-react";
+import type { Subject, Chapter } from "@/lib/types";
+const dummySubjects: Record<string, Subject> = {};
 
-const dummySubjects = {
-    matematika: {
-        title: "Matematika",
-        description: "Belajar matematika dasar sampai lanjut",
-        chapters: [
-            { title: "Aljabar", desc: "Materi aljabar dasar." },
-            { title: "Trigonometri", desc: "Materi trigonometri." },
-            { title: "Geometri", desc: "Materi geometri." },
-            { title: "Statistika", desc: "Materi statistika." },
-        ],
-    },
-    "bahasa-indonesia": {
-        title: "Bahasa Indonesia",
-        description: "Materi bahasa Indonesia lengkap",
-        chapters: [
-            { title: "Teks Argumentasi", desc: "Materi argumentasi." },
-            { title: "Ejaan", desc: "Materi ejaan." },
-            { title: "Kalimat Efektif", desc: "Materi kalimat efektif." },
-        ],
-    },
-    fisika: {
-        title: "Fisika",
-        description: "Belajar fisika SMA",
-        chapters: [
-            { title: "Gerak", desc: "Materi gerak." },
-            { title: "Gaya", desc: "Materi gaya." },
-            { title: "Energi", desc: "Materi energi." },
-        ],
-    },
-    "penalaran-umum": {
-        title: "Penalaran Umum",
-        description: "Latihan logika dan penalaran",
-        chapters: [
-            {
-                title: "Penalaran Deduktif",
-                desc: "Kelas ini terdiri dari enam modul yang akan fokus membahas dasar-dasar pada ilmu Data Science. Tujuan dari kelas ini adalah membuat Anda memiliki ketertarikan di dunia data dan ingin menjadi seorang data scientist andal; memiliki wawasan yang luas terkait dasar data science; serta memiliki portofolio data scientist di akhir pembelajaran.\nLatihan di kelas ini akan menggunakan tools yang mudah dipelajari bagi pemula."
-            },
-            {
-                title: "Penalaran Induktif",
-                desc: "Materi penalaran induktif berfokus pada penarikan kesimpulan dari contoh spesifik yang ada."
-            },
-            {
-                title: "Penalaran Kuantitatiff",
-                desc: "Materi penalaran kuantitatif meliputi pengolahan angka dan data numerik dasar secara terstruktur."
-            },
-        ],
-    },
-};
 
 export default function LearnPage() {
     const params = useParams();
@@ -69,20 +23,21 @@ export default function LearnPage() {
         return (
             <div className="flex items-center justify-center min-h-screen bg-[#f7f7f7]" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100dvh', backgroundColor: '#f7f7f7' }}>
                 <div className="p-10 text-xl font-bold text-slate-500">
-                    Memuat materi...
+                    Materi tidak ditemukan.
                 </div>
             </div>
         );
     }
 
-    const currentChapter = subject.chapters[currentIndex];
+    // Safely access chapters; fallback to first chapter if undefined
+    const currentChapter = subject.chapters?.[currentIndex] ?? subject.chapters?.[0];
 
     const handlePrev = () => {
         if (currentIndex > 0) setCurrentIndex(currentIndex - 1);
     };
 
     const handleNext = () => {
-        if (currentIndex < subject.chapters.length - 1) setCurrentIndex(currentIndex + 1);
+        if (subject.chapters && currentIndex < subject.chapters.length - 1) setCurrentIndex(currentIndex + 1);
     };
 
     return (
@@ -133,7 +88,7 @@ export default function LearnPage() {
                     <Link href="/dashboard/admin/subjects" className="hover:bg-slate-100 p-2 rounded-full transition-colors" style={{ padding: '8px', borderRadius: '9999px' }}>
                         <ChevronLeft className="w-7 h-7 stroke-[2.5]" style={{ width: '28px', height: '28px' }} />
                     </Link>
-                    <h1 className="text-xl font-black" style={{ fontSize: '20px', fontWeight: 900, margin: 0 }}>{subject.title}</h1>
+                    <h1 className="text-xl font-black" style={{ fontSize: '20px', fontWeight: 900, margin: 0 }}>{subject.name}</h1>
                 </div>
 
                 <div className="flex items-center gap-4" style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
@@ -189,7 +144,7 @@ export default function LearnPage() {
                         <div>
                             <h2 className="text-[22px] font-black mb-4" style={{ fontSize: '22px', fontWeight: 900, marginBottom: '16px' }}>Pengenalan Kelas</h2>
                             <p className="text-[15px] font-medium leading-relaxed text-slate-800 whitespace-pre-wrap" style={{ fontSize: '15px', fontWeight: 500, lineHeight: 1.6, color: '#1e293b', whiteSpace: 'pre-wrap' }}>
-                                {currentChapter.desc}
+                                {currentChapter?.description ?? ''}
                             </p>
 
                             <p className="text-[15px] font-medium leading-relaxed text-slate-800 mt-4" style={{ fontSize: '15px', fontWeight: 500, lineHeight: 1.6, color: '#1e293b', marginTop: '16px' }}>
@@ -227,7 +182,7 @@ export default function LearnPage() {
 
                             {/* Sidebar List */}
                             <div className="flex-1 overflow-y-auto p-2 pt-6" style={{ flex: 1, overflowY: 'auto', padding: '24px 8px 8px 8px' }}>
-                                {subject.chapters.map((chap, idx) => {
+                                {subject.chapters?.map((chap: Chapter, idx: number) => {
                                     const isActive = currentIndex === idx;
 
                                     return (
@@ -238,7 +193,7 @@ export default function LearnPage() {
                                             style={{ width: '100%', textAlign: 'left', padding: '16px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', border: 'none', background: isActive ? '#f0fdfa' : 'transparent', cursor: 'pointer' }}
                                         >
                                             <span className={`text-[15px] font-black transition-colors`} style={{ fontSize: '15px', fontWeight: 900, color: isActive ? '#0f172a' : '#475569' }}>
-                                                {chap.title}
+                                                {chap.name}
                                             </span>
 
                                             {/* Radio Button Indicator */}
@@ -268,15 +223,15 @@ export default function LearnPage() {
 
                 {/* Current Chapter Title (Center) */}
                 <div className="font-black text-slate-900 text-[15px] text-center absolute left-1/2 -translate-x-1/2" style={{ fontWeight: 900, color: '#0f172a', fontSize: '15px', textAlign: 'center', position: 'absolute', left: '50%', transform: 'translateX(-50%)', whiteSpace: 'nowrap' }}>
-                    {currentChapter.title}
+                    {currentChapter?.name ?? ''}
                 </div>
 
                 {/* Next Button */}
                 <button
                     onClick={handleNext}
-                    disabled={currentIndex === subject.chapters.length - 1}
+                    disabled={currentIndex === (subject.chapters?.length ?? 0) - 1}
                     className={`flex items-center gap-3 font-black text-[15px]`}
-                    style={{ display: 'flex', alignItems: 'center', gap: '12px', fontWeight: 900, fontSize: '15px', color: currentIndex === subject.chapters.length - 1 ? '#cbd5e1' : '#0f172a', background: 'transparent', border: 'none', cursor: currentIndex === subject.chapters.length - 1 ? 'not-allowed' : 'pointer' }}
+                    style={{ display: 'flex', alignItems: 'center', gap: '12px', fontWeight: 900, fontSize: '15px', color: currentIndex === (subject.chapters?.length ?? 0) - 1 ? '#cbd5e1' : '#0f172a', background: 'transparent', border: 'none', cursor: currentIndex === (subject.chapters?.length ?? 0) - 1 ? 'not-allowed' : 'pointer' }}
                 >
                     <span className="footer-btn-text">Selanjutnya</span>
                     <ChevronRight className="w-6 h-6 stroke-[3]" style={{ width: '24px', height: '24px' }} />
