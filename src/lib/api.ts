@@ -34,12 +34,16 @@ async function request<T>(
     headers,
   });
 
-  // Handle 401 — redirect to login
-  if (res.status === 401) {
+  // Handle 401 — redirect to login (except for auth endpoints)
+  if (res.status === 401 && !endpoint.includes("/auth/login") && !endpoint.includes("/auth/register")) {
     if (typeof window !== "undefined") {
       localStorage.removeItem("tirtanexa_token");
       localStorage.removeItem("tirtanexa_user");
-      window.location.href = "/login";
+      if (window.location.pathname !== "/login") {
+        window.location.href = "/login";
+      } else {
+        window.location.reload();
+      }
     }
     throw new Error("Sesi Anda telah berakhir. Silakan login kembali.");
   }

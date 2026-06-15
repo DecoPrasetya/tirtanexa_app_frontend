@@ -78,12 +78,12 @@ export default function DashboardLayout() {
 
   // Performa Mapel
   const mapelData = [
-    { icon: <Calculator size={16}/>, name: "Matematika", val: 0 },
-    { icon: <Book size={16}/>, name: "B. Indonesia", val: 0 },
-    { icon: <Globe size={16}/>, name: "B. Inggris", val: 0 },
-    { icon: <Zap size={16}/>, name: "Fisika", val: 0, warn: true },
-    { icon: <Beaker size={16}/>, name: "Kimia", val: 0, warn: true },
-    { icon: <Leaf size={16}/>, name: "Biologi", val: 0 },
+    { icon: <Calculator size={16} />, name: "Matematika", val: 0 },
+    { icon: <Book size={16} />, name: "B. Indonesia", val: 0 },
+    { icon: <Globe size={16} />, name: "B. Inggris", val: 0 },
+    { icon: <Zap size={16} />, name: "Fisika", val: 0, warn: true },
+    { icon: <Beaker size={16} />, name: "Kimia", val: 0, warn: true },
+    { icon: <Leaf size={16} />, name: "Biologi", val: 0 },
   ];
 
   // Tryout Yang Tersedia (Mock Data)
@@ -458,16 +458,16 @@ export default function DashboardLayout() {
                   <h3 className="font-bold text-lg text-slate-800 flex items-center gap-2">
                     <span className="text-teal-600"><BookOpen size={24} /></span> Materi Pembelajaran
                   </h3>
-                  <Link href="dashboard/admin/subjects" className="text-sm font-semibold text-teal-600 bg-teal-50 hover:bg-teal-100 rounded-full px-4 py-1.5 transition-colors">
+                  <Link href="dashboard/subjects" className="text-sm font-semibold text-teal-600 bg-teal-50 hover:bg-teal-100 rounded-full px-4 py-1.5 transition-colors">
                     Lihat Semua →
                   </Link>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {[
-                    { title: 'Penalaran Umum', desc: 'Aritmatika, Aljabar, Geometri', icon: <Calculator size={24}/>, progress: 45, color: 'bg-blue-500', light: 'bg-blue-50', text: 'text-blue-600', href: '/belajar/penalaran-umum' },
-                    { title: 'Literasi B. Indonesia', desc: 'Pemahaman teks & Argumentasi', icon: <BookText size={24}/>, progress: 20, color: 'bg-rose-500', light: 'bg-rose-50', text: 'text-rose-600', href: '/belajar/bahasa-indonesia' },
-                    { title: 'Literasi B. Inggris', desc: 'Reading & Vocabulary', icon: <Globe size={24}/>, progress: 10, color: 'bg-indigo-500', light: 'bg-indigo-50', text: 'text-indigo-600', href: '/belajar/bahasa-inggris' },
-                    { title: 'Penalaran Matematika', desc: 'Pemecahan masalah matematis', icon: <Hash size={24}/>, progress: 0, color: 'bg-amber-500', light: 'bg-amber-50', text: 'text-amber-600', href: '/belajar/matematika' }
+                    { title: 'Penalaran Umum', desc: 'Aritmatika, Aljabar, Geometri', icon: <Calculator size={24} />, progress: 45, color: 'bg-blue-500', light: 'bg-blue-50', text: 'text-blue-600', href: '/belajar/penalaran-umum' },
+                    { title: 'Literasi B. Indonesia', desc: 'Pemahaman teks & Argumentasi', icon: <BookText size={24} />, progress: 20, color: 'bg-rose-500', light: 'bg-rose-50', text: 'text-rose-600', href: '/belajar/bahasa-indonesia' },
+                    { title: 'Literasi B. Inggris', desc: 'Reading & Vocabulary', icon: <Globe size={24} />, progress: 10, color: 'bg-indigo-500', light: 'bg-indigo-50', text: 'text-indigo-600', href: '/belajar/bahasa-inggris' },
+                    { title: 'Penalaran Matematika', desc: 'Pemecahan masalah matematis', icon: <Hash size={24} />, progress: 0, color: 'bg-amber-500', light: 'bg-amber-50', text: 'text-amber-600', href: '/belajar/matematika' }
                   ].map((item, idx) => (
                     <Link href={item.href} key={idx} className="bg-white border border-slate-200 p-3 md:p-4 rounded-2xl shadow-sm hover:shadow-md transition-all hover:-translate-y-1 cursor-pointer group min-h-[60px] flex flex-col justify-center" style={{ textDecoration: 'none' }}>
                       <div className="flex items-center gap-3 md:gap-4 pr-2 md:pr-4">
@@ -614,7 +614,7 @@ export default function DashboardLayout() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* RADAR */}
                   <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden flex flex-col">
-                    <div className="p-4 md:p-5 border-b border-slate-100"><span className="font-bold text-slate-800 text-[14px] md:text-[15px] flex items-center gap-2"><Hexagon size={18} className="text-teal-600"/> Peta Kemampuan</span></div>
+                    <div className="p-4 md:p-5 border-b border-slate-100"><span className="font-bold text-slate-800 text-[14px] md:text-[15px] flex items-center gap-2"><Hexagon size={18} className="text-teal-600" /> Peta Kemampuan</span></div>
                     <div className="flex-1 p-3 md:p-4 min-h-[200px]">
                       <ResponsiveContainer width="100%" height="100%">
                         <RadarChart cx="50%" cy="50%" outerRadius="65%" data={radarData}>
@@ -634,7 +634,7 @@ export default function DashboardLayout() {
 
                   {/* PERFORMA MAPEL */}
                   <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden flex flex-col">
-                    <div className="p-4 md:p-5 border-b border-slate-100"><span className="font-bold text-slate-800 text-[14px] md:text-[15px] flex items-center gap-2"><Target size={18} className="text-teal-600"/> Performa Mapel</span></div>
+                    <div className="p-4 md:p-5 border-b border-slate-100"><span className="font-bold text-slate-800 text-[14px] md:text-[15px] flex items-center gap-2"><Target size={18} className="text-teal-600" /> Performa Mapel</span></div>
                     <div className="flex-1 p-4 md:p-5">
                       <div className="flex flex-wrap gap-1.5 md:gap-2 mb-4">
                         {["semua", "matematika", "b.indo", "b.inggris", "fisika", "kimia", "biologi"].map(p => (

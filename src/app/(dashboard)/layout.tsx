@@ -192,7 +192,9 @@ export default function DashboardLayout({
           <div className="tbar-r flex items-center">
             <button className="icobtn flex items-center justify-center" onClick={() => setSearchOpen(true)}><Search size={20} /></button>
             <button className="icobtn flex items-center justify-center"><Bell size={20} /></button>
-            <div className="tav">{dpInitials}</div>
+            <Link href="/dashboard/profile" className="tav hover:opacity-80 transition-opacity cursor-pointer">
+              {dpInitials}
+            </Link>
           </div>
         </header>
 
@@ -202,7 +204,9 @@ export default function DashboardLayout({
           <div className="dsearch"><span style={{color:"var(--gray-400)"}}><Search size={16} /></span><input placeholder="Cari soal, materi..." /></div>
           <div style={{display:"flex", gap:"8px", alignItems:"center"}}>
             <button className="icobtn flex items-center justify-center"><Bell size={20} /></button>
-            <div className="tav">{dpInitials}</div>
+            <Link href="/dashboard/profile" className="tav hover:opacity-80 transition-opacity cursor-pointer">
+              {dpInitials}
+            </Link>
           </div>
         </div>
 
