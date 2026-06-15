@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   Crown,
@@ -12,15 +12,20 @@ import {
   Save,
   Moon,
   Sun,
-  Route
+  School,
+  GraduationCap,
+  Rocket,
+  MapPin
 } from "lucide-react";
 import Link from "next/link";
 import { useAuthStore } from "@/lib/auth-store";
+import { api } from "@/lib/api";
 import Card from "@/components/ui/Card";
 import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import { useRouter } from "next/navigation";
+import type { ExamSession } from "@/lib/types";
 
 export default function ProfilePage() {
   const { user } = useAuthStore();
@@ -28,10 +33,32 @@ export default function ProfilePage() {
   const [fullName, setFullName] = useState(user?.fullName || "");
   const [saving, setSaving] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
+  const [history, setHistory] = useState<ExamSession[]>([]);
+  const [loadingHistory, setLoadingHistory] = useState(true);
+
+  useEffect(() => {
+    async function fetchHistory() {
+      try {
+        const hist = await api.exams.getHistory();
+        setHistory(Array.isArray(hist) ? hist : []);
+      } catch (err) {
+        console.error("Failed to fetch history", err);
+      } finally {
+        setLoadingHistory(false);
+      }
+    }
+    fetchHistory();
+  }, []);
+
+  useEffect(() => {
+    if (user) {
+      setFullName(user.fullName);
+    }
+  }, [user]);
 
   const handleSave = async () => {
     setSaving(true);
-    // Logic simpan profil
+    // Logic simpan profil (name only on this quick save, full edit in /profile/edit)
     setTimeout(() => setSaving(false), 1000);
   };
 
@@ -41,10 +68,8 @@ export default function ProfilePage() {
     ADMIN: "orange" as const,
   };
 
-  const campusChoices = [
-    { label: "Pilihan 1", value: "Universitas Indonesia - Teknik Informatika" },
-    { label: "Pilihan 2", value: "Institut Teknologi Bandung - Sekolah Teknik Elektro & Informatika" },
-  ];
+  const isStudent = user?.role === "STUDENT";
+  const recentExams = [...history].sort((a, b) => new Date(b.startedAt).getTime() - new Date(a.startedAt).getTime()).slice(0, 5);
 
   return (
     <div className="w-full flex justify-center px-4 md:px-8 py-6 pb-24">
@@ -57,30 +82,32 @@ export default function ProfilePage() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <div className="rounded-2xl lg:rounded-[24px] border border-[#20b8ae] bg-[#3ecdc3] shadow-sm overflow-hidden p-5 sm:p-6">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-5">
+          <div className="rounded-[32px] border border-[#20b8ae] bg-[#3ecdc3] shadow-sm overflow-hidden p-6 sm:p-8">
+            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 sm:gap-8">
 
               {/* LEFT */}
-              <div className="flex flex-col sm:flex-row sm:items-center md:items-start gap-4">
+              <div className="flex flex-col sm:flex-row sm:items-start gap-5">
 
-                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white/20 flex items-center justify-center shrink-0 mx-auto sm:mx-0">
-                  <Crown size={24} className="text-white" />
+                <div className="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center shrink-0">
+                  <Crown size={30} className="text-white" />
                 </div>
 
-                <div className="space-y-1.5 text-center sm:text-left">
+                <div className="space-y-3 text-center sm:text-left">
 
-                  <h2 className="font-bold text-white text-xl sm:text-2xl leading-none">
+                  <h2 className="font-black text-white text-3xl sm:text-4xl leading-none">
                     Upgrade Premium
                   </h2>
 
-                  <p className="text-white/90 leading-relaxed text-xs sm:text-sm max-w-[500px]">
-                    Akses penuh ke tryout premium, pembahasan lengkap, video pembelajaran, ranking nasional, dan materi belajar.
+                  <p className="text-white/90 leading-relaxed text-sm sm:text-base max-w-[680px]">
+                    Akses penuh ke tryout premium,
+                    pembahasan lengkap, video pembelajaran,
+                    ranking nasional, dan seluruh materi belajar.
                   </p>
                 </div>
               </div>
 
               {/* BUTTON */}
-              <button className="bg-[#ff8c2b] hover:bg-[#ff7a0f] transition-all duration-300 rounded-xl font-bold text-white w-full md:w-fit whitespace-nowrap px-5 py-3 text-sm shrink-0">
+              <button className="bg-[#ff8c2b] hover:bg-[#ff7a0f] transition-all duration-300 rounded-2xl font-bold text-white w-full lg:w-fit whitespace-nowrap px-6 py-4 text-sm sm:text-base shrink-0">
                 Upgrade Sekarang
               </button>
             </div>
@@ -160,8 +187,7 @@ export default function ProfilePage() {
                       onChange={(e) =>
                         setFullName(e.target.value)
                       }
-                      leftIcon={<User size={16} />}
-                      className="h-10 sm:h-11 text-sm"
+                      leftIcon={<User size={18} />}
                     />
                   </div>
                 </div>
@@ -222,7 +248,7 @@ export default function ProfilePage() {
                         {user?.createdAt
                           ? new Date(
                             user.createdAt
-                          ).toLocaleDateString("id-ID")
+                          ).toLocaleDateString("id-ID", { day: 'numeric', month: 'long', year: 'numeric' })
                           : "—"}
                       </span>
                     </div>
@@ -235,7 +261,7 @@ export default function ProfilePage() {
                     isLoading={saving}
                     onClick={handleSave}
                     leftIcon={<Save size={16} />}
-                    className="rounded-xl h-10 sm:h-11 px-6 text-sm w-full sm:w-fit"
+                    className="rounded-2xl h-12 sm:h-[52px] px-6 sm:px-7 w-full sm:w-fit"
                   >
                     Simpan Perubahan
                   </Button>
@@ -252,26 +278,26 @@ export default function ProfilePage() {
           transition={{ delay: 0.1 }}
         >
           <Card
-            className="rounded-2xl lg:rounded-[24px] border border-[var(--border)] shadow-sm"
+            className="rounded-[32px] border border-[var(--border)] shadow-sm"
             padding="none"
           >
 
-            <div className="p-5 sm:p-6 md:p-8">
+            <div className="p-6 sm:p-8 lg:p-10">
 
               {/* HEADER */}
-              <div className="mb-5 sm:mb-6">
+              <div className="mb-6 sm:mb-8">
 
-                <h2 className="font-bold text-[var(--text)] text-lg sm:text-xl md:text-2xl mb-1 sm:mb-1.5">
+                <h2 className="font-black text-[var(--text)] text-2xl sm:text-3xl mb-2">
                   Aktivitas Terkini
                 </h2>
 
-                <p className="text-xs sm:text-sm text-[var(--text-muted)]">
+                <p className="text-sm sm:text-base text-[var(--text-muted)]">
                   Riwayat belajar dan progres terbaru kamu.
                 </p>
               </div>
 
               {/* LIST */}
-              <div className="space-y-3">
+              <div className="space-y-4">
 
                 {[
                   {
@@ -293,28 +319,28 @@ export default function ProfilePage() {
 
                   <div
                     key={idx}
-                    className="rounded-xl border border-[var(--border)] bg-[var(--bg-secondary)] hover:bg-white transition-all duration-300 p-4"
+                    className="rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] hover:bg-white transition-all duration-300 p-4 sm:p-5"
                   >
 
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
 
-                      <div className="flex items-start gap-3">
+                      <div className="flex items-start gap-3 sm:gap-4">
 
-                        <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[var(--teal)] mt-1.5 shrink-0" />
+                        <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[var(--teal)] mt-1.5 sm:mt-2 shrink-0" />
 
-                        <div className="space-y-1">
+                        <div className="space-y-1 sm:space-y-2">
 
-                          <h3 className="font-semibold text-sm leading-snug text-[var(--text)]">
+                          <h3 className="font-semibold text-sm sm:text-[15px] leading-snug sm:leading-relaxed text-[var(--text)]">
                             {item.title}
                           </h3>
 
-                          <p className="text-[11px] sm:text-xs text-[var(--text-muted)]">
+                          <p className="text-xs text-[var(--text-muted)]">
                             {item.time}
                           </p>
                         </div>
                       </div>
 
-                      <button className="text-[13px] sm:text-sm font-bold text-[var(--teal)] hover:underline shrink-0 sm:self-center ml-[20px] sm:ml-0">
+                      <button className="text-sm font-bold text-[var(--teal)] hover:underline shrink-0 sm:self-center ml-[22px] sm:ml-0">
                         Lihat
                       </button>
                     </div>
@@ -333,25 +359,25 @@ export default function ProfilePage() {
           transition={{ delay: 0.15 }}
         >
           <Card
-            className="rounded-2xl lg:rounded-[24px] overflow-hidden border border-[var(--border)] shadow-sm"
+            className="rounded-[32px] overflow-hidden border border-[var(--border)] shadow-sm"
             padding="none"
           >
 
             {/* HEADER */}
-            <div className="border-b border-[var(--border)] flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 sm:p-6 md:p-8">
+            <div className="border-b border-[var(--border)] flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-6 p-6 sm:p-8 lg:p-10">
 
               <div>
-                <h2 className="font-bold text-[var(--text)] text-lg sm:text-xl md:text-2xl mb-1 sm:mb-1.5">
+                <h2 className="font-black text-[var(--text)] text-2xl sm:text-3xl mb-2">
                   Kampus dan Prodi
                 </h2>
 
-                <p className="text-xs sm:text-sm text-[var(--text-muted)]">
+                <p className="text-sm sm:text-base text-[var(--text-muted)]">
                   Target kampus dan program studi kamu.
                 </p>
               </div>
 
               <Link href="/dashboard/profile/edit" className="w-full sm:w-fit block">
-                <Button leftIcon={<Pencil size={14} />} className="rounded-xl h-10 sm:h-11 px-5 text-sm w-full">
+                <Button leftIcon={<Pencil size={16} />} className="rounded-2xl h-10 sm:h-[50px] px-5 sm:px-6 w-full">
                   Ubah
                 </Button>
               </Link>
@@ -364,79 +390,131 @@ export default function ProfilePage() {
 
                 <div
                   key={idx}
-                  className={`flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-6 border-b border-[var(--border)] p-4 sm:p-5 md:p-6 ${idx === campusChoices.length - 1
+                  className={`flex flex-col lg:flex-row lg:items-start gap-2 lg:gap-8 border-b border-[var(--border)] p-5 sm:p-6 lg:p-8 ${idx === campusChoices.length - 1
                     ? "border-b-0"
                     : ""
                     }`}
                 >
 
-                  <div className="font-bold text-xs sm:text-sm text-[var(--text-muted)] sm:w-28 shrink-0">
+                  <div className="font-bold text-xs sm:text-sm text-[var(--text-muted)] lg:w-32 shrink-0">
                     {item.label}
                   </div>
 
-                  <div className="font-semibold text-sm leading-snug text-[var(--text)] mt-1 sm:mt-0">
+                  <div className="font-semibold text-sm sm:text-base leading-snug sm:leading-relaxed text-[var(--text)]">
                     {item.value}
                   </div>
                 </div>
 
-              ))}
-            </div>
-          </Card>
-        </motion.div>
-
-        {/* ================= TEMA ================= */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-        >
-          <Card
-            className="rounded-2xl lg:rounded-[24px] border border-[var(--border)] shadow-sm"
-            padding="none"
-          >
-
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 sm:p-6 md:p-8">
-
-              <div>
-
-                <h2 className="font-bold text-[var(--text)] text-lg sm:text-xl md:text-2xl mb-1 sm:mb-1.5">
-                  Tema
-                </h2>
-
-                <p className="text-xs sm:text-sm text-[var(--text-muted)]">
-                  Atur tampilan aplikasi sesuai preferensi kamu.
-                </p>
-              </div>
-
-              {/* SWITCH */}
-              <button
-                onClick={() =>
-                  setDarkMode(!darkMode)
-                }
-                className={`w-16 sm:w-[72px] h-8 sm:h-10 rounded-full transition-all duration-300 flex p-1 shrink-0 self-start sm:self-center ${darkMode
-                  ? "bg-slate-800 justify-end"
-                  : "bg-slate-200 justify-start"
-                  }`}
-              >
-
-                <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-white shadow-md flex items-center justify-center shrink-0">
-                  {darkMode ? (
-                    <Moon
-                      size={14}
-                      className="text-slate-700 sm:w-4 sm:h-4"
-                    />
-                  ) : (
-                    <Sun
-                      size={14}
-                      className="text-yellow-500 sm:w-4 sm:h-4"
-                    />
-                  )}
+                {/* LIST */ }
+                < div className = "space-y-4" >
+                {
+                  loadingHistory?(
+                    <div className = "text-sm text-[var(--text-muted)]" > Memuat aktivitas...</div>
+                  ) : recentExams.length > 0 ? (
+                    recentExams.map((exam) => (
+            <div
+              key={exam.id}
+              className="rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] hover:bg-white transition-all duration-300 p-4 sm:p-5"
+            >
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div className="flex items-start gap-3 sm:gap-4">
+                  <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[var(--teal)] mt-1.5 sm:mt-2 shrink-0" />
+                  <div className="space-y-1 sm:space-y-2">
+                    <h3 className="font-semibold text-sm sm:text-[15px] leading-snug sm:leading-relaxed text-[var(--text)]">
+                      {exam.title}
+                    </h3>
+                    <p className="text-xs text-[var(--text-muted)]">
+                      {new Date(exam.startedAt).toLocaleDateString("id-ID", {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                        hour: "2-digit",
+                        minute: "2-digit"
+                      })} WIB
+                    </p>
+                  </div>
                 </div>
-              </button>
+                <Link href={`/dashboard/exams/${exam.id}/result`} className="text-sm font-bold text-[var(--teal)] hover:underline shrink-0 sm:self-center ml-[22px] sm:ml-0">
+                  Lihat
+                </Link>
+              </div>
             </div>
-          </Card>
-        </motion.div>
+            ))
+            ) : (
+            <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] p-4 sm:p-5">
+              <div className="flex items-start gap-3 sm:gap-4">
+                <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-slate-300 mt-1.5 sm:mt-2 shrink-0" />
+                <div className="space-y-1 sm:space-y-2">
+                  <h3 className="font-semibold text-sm sm:text-[15px] leading-snug sm:leading-relaxed text-[var(--text)]">
+                    Belum ada aktivitas
+                  </h3>
+                  <p className="text-xs text-[var(--text-muted)] flex items-center gap-1">
+                    Ayo mulai belajar hari ini <Rocket size={12} className="text-teal-500" />
+                  </p>
+                </div>
+              </div>
+            </div>
+                  )}
+          </div>
       </div>
+    </Card>
+          </motion.div >
+        )
+}
+
+{/* ================= TEMA ================= */ }
+<motion.div
+  initial={{ opacity: 0, y: 12 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ delay: 0.2 }}
+>
+  <Card
+    className="rounded-2xl lg:rounded-[24px] border border-[var(--border)] shadow-sm"
+    padding="none"
+  >
+
+    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 sm:p-6 md:p-8">
+
+      <div>
+
+        <h2 className="font-bold text-[var(--text)] text-lg sm:text-xl md:text-2xl mb-1 sm:mb-1.5">
+          Tema
+        </h2>
+
+        <p className="text-xs sm:text-sm text-[var(--text-muted)]">
+          Atur tampilan aplikasi sesuai preferensi kamu.
+        </p>
+      </div>
+
+      {/* SWITCH */}
+      <button
+        onClick={() =>
+          setDarkMode(!darkMode)
+        }
+        className={`w-16 sm:w-[72px] h-8 sm:h-10 rounded-full transition-all duration-300 flex p-1 shrink-0 self-start sm:self-center ${darkMode
+          ? "bg-slate-800 justify-end"
+          : "bg-slate-200 justify-start"
+          }`}
+      >
+
+        <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-white shadow-md flex items-center justify-center shrink-0">
+          {darkMode ? (
+            <Moon
+              size={14}
+              className="text-slate-700 sm:w-4 sm:h-4"
+            />
+          ) : (
+            <Sun
+              size={14}
+              className="text-yellow-500 sm:w-4 sm:h-4"
+            />
+          )}
+        </div>
+      </button>
     </div>
+  </Card>
+</motion.div>
+      </div >
+    </div >
   );
 }

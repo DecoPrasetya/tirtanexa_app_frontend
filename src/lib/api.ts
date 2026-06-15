@@ -74,8 +74,14 @@ export const api = {
 
     getMe: () => request<import("./types").User>("/auth/me"),
 
-    updateProfile: (data: { fullName?: string; avatarUrl?: string }) =>
+    updateProfile: (data: { fullName?: string; avatarUrl?: string; phone?: string | null; school?: string | null; city?: string | null; grade?: string | null; birthDate?: string | null; }) =>
       request<import("./types").User>("/auth/profile", {
+        method: "PUT",
+        body: JSON.stringify(data),
+      }),
+
+    changePassword: (data: { oldPassword?: string; newPassword?: string }) =>
+      request<void>("/auth/password", {
         method: "PUT",
         body: JSON.stringify(data),
       }),
