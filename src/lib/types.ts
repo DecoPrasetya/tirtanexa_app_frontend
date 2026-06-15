@@ -7,6 +7,15 @@ export type ExamStatus = "IN_PROGRESS" | "COMPLETED" | "ABANDONED";
 export type TournamentStatus = "WAITING" | "STARTING" | "IN_PROGRESS" | "FINISHED";
 
 /* ============ USER ============ */
+export interface StudentProfile {
+  id: string;
+  phone: string | null;
+  school: string | null;
+  city: string | null;
+  grade: string | null;
+  birthDate: string | null;
+}
+
 export interface User {
   id: string;
   email: string;
@@ -14,6 +23,7 @@ export interface User {
   avatarUrl: string | null;
   role: Role;
   createdAt: string;
+  studentProfile?: StudentProfile | null;
 }
 
 /* ============ SUBJECT & CHAPTER ============ */
