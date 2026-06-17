@@ -35,8 +35,8 @@ export default function ExamResultPage() {
 
       {/* Score card */}
       <motion.div initial={{opacity:0,scale:0.95}} animate={{opacity:1,scale:1}} className="gradient-teal rounded-[var(--radius-xl)] p-8 text-white text-center relative overflow-hidden">
-        <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-white/5"/>
-        <div className="absolute -bottom-10 -left-10 w-32 h-32 rounded-full bg-white/5"/>
+        <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--surface)]/5"/>
+        <div className="absolute -bottom-10 -left-10 w-32 h-32 rounded-full bg-[var(--surface)]/5"/>
         <div className="relative z-10">
           <Trophy size={40} className="mx-auto mb-3 text-white/80"/>
           <h2 className="text-lg font-medium text-white/80 mb-1">{exam.title}</h2>

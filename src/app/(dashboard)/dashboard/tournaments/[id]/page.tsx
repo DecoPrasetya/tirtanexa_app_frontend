@@ -36,9 +36,9 @@ export default function TournamentDetailPage() {
   return (
     <div className="max-w-3xl mx-auto space-y-6">
       <Card padding="lg" className="gradient-teal text-white relative overflow-hidden">
-        <div className="absolute -top-10 -right-10 w-32 h-32 rounded-full bg-white/5"/>
+        <div className="absolute -top-10 -right-10 w-32 h-32 rounded-full bg-[var(--surface)]/5"/>
         <div className="relative z-10">
-          <Badge variant="default" className="!bg-white/20 !text-white mb-3">{s.l}</Badge>
+          <Badge variant="default" className="!bg-[var(--surface)]/20 !text-white mb-3">{s.l}</Badge>
           <h1 className="text-2xl font-bold mb-1">{tournament.title}</h1>
           {tournament.description && <p className="text-sm text-white/70">{tournament.description}</p>}
           <div className="flex items-center gap-4 mt-4 text-sm text-white/80">

@@ -133,7 +133,7 @@ export default function DashboardLayout() {
 
           {/* Header Sapaan */}
           <div>
-            <h1 className="text-3xl font-bold text-slate-900 flex items-center gap-2">Halo, {dpName.split(" ")[0]}! <Hand className="text-yellow-500" size={32} /></h1>
+            <h1 className="text-3xl font-bold text-[var(--text)] flex items-center gap-2">Halo, {dpName.split(" ")[0]}! <Hand className="text-yellow-500" size={32} /></h1>
             <div className="relative mt-1 w-[320px]">
 
               {/* BUTTON */}
@@ -145,7 +145,7 @@ export default function DashboardLayout() {
 
 
                   <div className="text-left">
-                    <p className="font-semibold text-slate-800 text-lg hover:text-teal-600 transition-colors">
+                    <p className="font-semibold text-[var(--text)] text-lg hover:text-teal-600 transition-colors">
                       {selectedJurusan}
                     </p>
                   </div>
@@ -153,7 +153,7 @@ export default function DashboardLayout() {
 
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className={`w-5 h-5 text-slate-400 transition-transform duration-300 ${openJurusan ? "rotate-180" : ""
+                  className={`w-5 h-5 text-[var(--text-muted)] transition-transform duration-300 ${openJurusan ? "rotate-180" : ""
                     }`}
                   fill="none"
                   viewBox="0 0 24 24"
@@ -166,7 +166,7 @@ export default function DashboardLayout() {
 
               {/* DROPDOWN */}
               {openJurusan && (
-                <div className="absolute z-50 mt-4 w-[calc(100vw-32px)] max-w-[400px] -left-2 sm:left-0 ml-4 sm:ml-0 rounded-3xl border border-slate-200 bg-white shadow-2xl overflow-hidden">
+                <div className="absolute z-50 mt-4 w-[calc(100vw-32px)] max-w-[400px] -left-2 sm:left-0 ml-4 sm:ml-0 rounded-3xl border border-[var(--border)] bg-[var(--surface)] shadow-2xl overflow-hidden">
 
 
                   {/* LIST */}
@@ -183,17 +183,17 @@ export default function DashboardLayout() {
                             setOpenJurusan(false);
                           }}
                           className={`w-full flex items-center justify-between pr-4 rounded-2xl px-5 py-4 transition-all duration-200 border ${isActive
-                            ? "bg-teal-50/60 border-teal-100/50 shadow-sm"
-                            : "bg-white border-slate-100 shadow-sm hover:bg-slate-50 hover:border-slate-300"
+                            ? "bg-teal-50 dark:bg-teal-500/10 border-teal-100 dark:border-teal-500/30 shadow-sm"
+                            : "bg-[var(--surface)] border-[var(--border)] shadow-sm hover:bg-[var(--surface-hover)] hover:border-[var(--border-hover)]"
                             }`}
                         >
                           <div className="flex items-center gap-4" style={{ padding: '16px 24px' }}>
                             {/* TEXT */}
                             <div className="text-left flex flex-col gap-1.5">
-                              <h4 className={`font-bold text-[15px] leading-none ${isActive ? "text-teal-900" : "text-slate-800"}`}>
+                              <h4 className={`font-bold text-[15px] leading-none ${isActive ? "text-teal-600 dark:text-teal-400" : "text-[var(--text)]"}`}>
                                 {item.title}
                               </h4>
-                              <p className={`text-[13px] leading-none ${isActive ? "text-teal-600 font-semibold" : "text-slate-400"}`}>
+                              <p className={`text-[13px] leading-none ${isActive ? "text-teal-500 dark:text-teal-300 font-semibold" : "text-[var(--text-muted)]"}`}>
                                 {isActive ? "Aktif sekarang" : "Jelajahi jalur ini"}
                               </p>
                             </div>
@@ -224,14 +224,14 @@ export default function DashboardLayout() {
           </div>
 
           {/* Navigasi Tab */}
-          <div className="flex flex-wrap gap-x-8 gap-y-4 border-b border-slate-200">
+          <div className="flex flex-wrap gap-x-8 gap-y-4 border-b border-[var(--border)]">
             {tabs.map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
                 className={`pb-3 text-base font-semibold transition-colors duration-200 ${activeTab === tab
                   ? 'text-teal-600 border-b-2 border-teal-600'
-                  : 'text-slate-400 hover:text-slate-700'
+                  : 'text-[var(--text-muted)] hover:text-[var(--text-secondary)]'
                   }`}
               >
                 {tab}
@@ -255,7 +255,7 @@ export default function DashboardLayout() {
                     </div>
 
                     {/* Icon utama */}
-                    <div className="bg-white/20 p-3 rounded-2xl backdrop-blur-md shadow-inner relative z-10 text-white flex items-center justify-center">
+                    <div className="bg-[var(--surface)]/20 p-3 rounded-2xl backdrop-blur-md shadow-inner relative z-10 text-white flex items-center justify-center">
                       <PenTool size={32} />
                     </div>
 
@@ -278,7 +278,7 @@ export default function DashboardLayout() {
                     </div>
 
                     {/* Icon utama */}
-                    <div className="bg-white/20 p-3 rounded-2xl backdrop-blur-md shadow-inner relative z-10 text-white flex items-center justify-center">
+                    <div className="bg-[var(--surface)]/20 p-3 rounded-2xl backdrop-blur-md shadow-inner relative z-10 text-white flex items-center justify-center">
                       <Trophy size={32} />
                     </div>
 
@@ -295,7 +295,7 @@ export default function DashboardLayout() {
                 </div>
 
                 <div className="flex flex-col gap-4">
-                  <h3 className="font-bold text-lg text-slate-800 flex items-center gap-2">
+                  <h3 className="font-bold text-lg text-[var(--text)] flex items-center gap-2">
                     <span className="text-teal-600"><Rocket size={24} /></span> Tryout yang tersedia
                   </h3>
                   <div className="flex flex-col gap-4">
@@ -306,7 +306,7 @@ export default function DashboardLayout() {
                         className="w-full bg-gradient-to-r from-teal-500 to-teal-400 text-white rounded-3xl shadow-sm flex flex-row items-stretch gap-3 md:gap-4 relative overflow-hidden group cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all min-h-[85px]"
                       >
                         {/* Icon */}
-                        <div className="bg-white w-16 md:w-24 flex-shrink-0 flex items-center justify-center shadow-md z-10 py-4 md:py-0 transition-colors duration-300 group-hover:bg-slate-50">
+                        <div className="bg-[var(--surface)] w-16 md:w-24 flex-shrink-0 flex items-center justify-center shadow-md z-10 py-4 md:py-0 transition-colors duration-300 group-hover:bg-[var(--bg-alt)]">
 
                           <img
                             src="/snbt2.png"
@@ -317,7 +317,7 @@ export default function DashboardLayout() {
 
                         {/* Content */}
                         <div className="flex-1 w-full z-10 flex flex-col justify-center py-4 px-3 md:p-5">
-                          <span className="bg-white/20 text-[10px] md:text-xs font-semibold px-2 md:px-3 py-1 rounded-md w-fit mb-1.5 text-white">
+                          <span className="bg-[var(--surface)]/20 text-[10px] md:text-xs font-semibold px-2 md:px-3 py-1 rounded-md w-fit mb-1.5 text-white">
                             {tryout.type}
                           </span>
 
@@ -339,34 +339,34 @@ export default function DashboardLayout() {
                   )}
                 </div>
 
-                {/* <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
-                  <div className="p-4 border-b border-slate-100 flex justify-between items-center">
-                    <span className="font-bold text-slate-800 flex items-center gap-2">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-slate-500" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" /></svg>
+                {/* <div className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl shadow-sm overflow-hidden">
+                  <div className="p-4 border-b border-[var(--border)] flex justify-between items-center">
+                    <span className="font-bold text-[var(--text)] flex items-center gap-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[var(--text-muted)]" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" /></svg>
                       Riwayat Ujian
                     </span>
                     <Link href="/dashboard/history" className="text-sm font-semibold text-teal-600 hover:text-teal-700">Lihat Semua →</Link>
                   </div>
                   <div className="divide-y divide-slate-100">
                     {loading ? (
-                      <div className="text-center text-xs text-slate-400 py-6">Memuat data...</div>
+                      <div className="text-center text-xs text-[var(--text-muted)] py-6">Memuat data...</div>
                     ) : recentExams.length > 0 ? (
                       recentExams.map((exam) => (
-                        <Link href={`/dashboard/exams/${exam.id}/result`} key={exam.id} className="flex items-center justify-between p-6 hover:bg-slate-50 transition-colors">
+                        <Link href={`/dashboard/exams/${exam.id}/result`} key={exam.id} className="flex items-center justify-between p-6 hover:bg-[var(--surface-hover)] transition-colors">
                           <div className="flex items-center gap-4">
                             <div className={`w-10 h-10 rounded-full flex items-center justify-center text-lg ${exam.type === "PRACTICE" ? "bg-teal-100 text-teal-600" : exam.type === "TRYOUT" ? "bg-orange-100 text-orange-600" : "bg-indigo-100 text-indigo-600"}`}>
                               {exam.type === "PRACTICE" ? "✏️" : exam.type === "TRYOUT" ? "📝" : "🏆"}
                             </div>
                             <div>
-                              <div className="font-bold text-slate-800 text-sm">{exam.title}</div>
-                              <div className="text-xs text-slate-500 mt-0.5">
+                              <div className="font-bold text-[var(--text)] text-sm">{exam.title}</div>
+                              <div className="text-xs text-[var(--text-muted)] mt-0.5">
                                 {new Date(exam.startedAt).toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" })} · {exam.totalQuestions} soal
                               </div>
                             </div>
                           </div>
                           {exam.status === "COMPLETED" ? (
                             <div className="text-right">
-                              <div className="text-xs text-slate-500 font-semibold mb-0.5">Skor IRT</div>
+                              <div className="text-xs text-[var(--text-muted)] font-semibold mb-0.5">Skor IRT</div>
                               <div className="font-bold text-teal-600">{exam.irtScore ? Math.round(exam.irtScore) : "—"}</div>
                             </div>
                           ) : (
@@ -377,7 +377,7 @@ export default function DashboardLayout() {
                         </Link>
                       ))
                     ) : (
-                      <div className="text-center text-xs text-slate-400 py-6">Belum ada riwayat ujian</div>
+                      <div className="text-center text-xs text-[var(--text-muted)] py-6">Belum ada riwayat ujian</div>
                     )}
                   </div>
                 </div> */}
@@ -388,7 +388,7 @@ export default function DashboardLayout() {
             {activeTab === 'Belajar' && (
               <div className="flex flex-col gap-8 pt-2 pb-20">
                 <div className="flex flex-col gap-4">
-                  <h3 className="font-bold text-lg text-slate-800 flex items-center gap-2">
+                  <h3 className="font-bold text-lg text-[var(--text)] flex items-center gap-2">
                     <span className="text-teal-600"><Rocket size={24} /></span> Lanjutkan Pembelajaran
                   </h3>
                   <div className="flex flex-col gap-4">
@@ -414,7 +414,7 @@ export default function DashboardLayout() {
 
                           {/* Top */}
                           <div className="flex justify-between items-center gap-3 pr-2">
-                            <span className="bg-white/20 text-[10px] md:text-xs font-semibold px-2 py-1 rounded-md uppercase tracking-wide">
+                            <span className="bg-[var(--surface)]/20 text-[10px] md:text-xs font-semibold px-2 py-1 rounded-md uppercase tracking-wide">
                               {item.category}
                             </span>
                           </div>
@@ -438,11 +438,11 @@ export default function DashboardLayout() {
                             </div>
 
                             {/* Bar background */}
-                            <div className="w-full bg-white/20 h-1.5 md:h-2 rounded-full overflow-hidden">
+                            <div className="w-full bg-[var(--surface)]/20 h-1.5 md:h-2 rounded-full overflow-hidden">
 
                               {/* Bar isi (ANIMASI) */}
                               <div
-                                className="bg-white h-full rounded-full transition-all duration-1000 ease-out shadow-[0_0_10px_rgba(255,255,255,0.6)]"
+                                className="bg-[var(--surface)] h-full rounded-full transition-all duration-1000 ease-out shadow-[0_0_10px_rgba(255,255,255,0.6)]"
                                 style={{ width: `${item.progress}%` }}
                               ></div>
 
@@ -455,7 +455,7 @@ export default function DashboardLayout() {
                 </div>
 
                 <div className="flex justify-between items-center">
-                  <h3 className="font-bold text-lg text-slate-800 flex items-center gap-2">
+                  <h3 className="font-bold text-lg text-[var(--text)] flex items-center gap-2">
                     <span className="text-teal-600"><BookOpen size={24} /></span> Materi Pembelajaran
                   </h3>
                   <Link href="dashboard/subjects" className="text-sm font-semibold text-teal-600 bg-teal-50 hover:bg-teal-100 rounded-full px-4 py-1.5 transition-colors">
@@ -469,14 +469,14 @@ export default function DashboardLayout() {
                     { title: 'Literasi B. Inggris', desc: 'Reading & Vocabulary', icon: <Globe size={24} />, progress: 10, color: 'bg-indigo-500', light: 'bg-indigo-50', text: 'text-indigo-600', href: '/belajar/bahasa-inggris' },
                     { title: 'Penalaran Matematika', desc: 'Pemecahan masalah matematis', icon: <Hash size={24} />, progress: 0, color: 'bg-amber-500', light: 'bg-amber-50', text: 'text-amber-600', href: '/belajar/matematika' }
                   ].map((item, idx) => (
-                    <Link href={item.href} key={idx} className="bg-white border border-slate-200 p-3 md:p-4 rounded-2xl shadow-sm hover:shadow-md transition-all hover:-translate-y-1 cursor-pointer group min-h-[60px] flex flex-col justify-center" style={{ textDecoration: 'none' }}>
+                    <Link href={item.href} key={idx} className="bg-[var(--surface)] border border-[var(--border)] p-3 md:p-4 rounded-2xl shadow-sm hover:shadow-md transition-all hover:-translate-y-1 cursor-pointer group min-h-[60px] flex flex-col justify-center" style={{ textDecoration: 'none' }}>
                       <div className="flex items-center gap-3 md:gap-4 pr-2 md:pr-4">
                         <div className={`${item.light} ${item.text} w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center text-xl md:text-2xl shrink-0 group-hover:scale-110 transition-transform duration-300`}>
                           {item.icon}
                         </div>
                         <div className="flex-1">
-                          <h4 className="font-bold text-sm md:text-base text-slate-800 line-clamp-1">{item.title}</h4>
-                          <p className="text-[11px] md:text-xs text-slate-500 mt-0.5 line-clamp-1">{item.desc}</p>
+                          <h4 className="font-bold text-sm md:text-base text-[var(--text)] line-clamp-1">{item.title}</h4>
+                          <p className="text-[11px] md:text-xs text-[var(--text-muted)] mt-0.5 line-clamp-1">{item.desc}</p>
                         </div>
                       </div>
                     </Link>
@@ -491,91 +491,91 @@ export default function DashboardLayout() {
                 {/* STAT GRID */}
                 {/* STAT GRID */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
-                  <div className="bg-white border border-slate-200 px-3 py-4 md:py-5 rounded-[20px] shadow-sm flex flex-col items-center justify-center text-center hover:border-teal-200 hover:shadow-md transition-all duration-300 min-h-[100px] md:min-h-[120px]">
+                  <div className="bg-[var(--surface)] border border-[var(--border)] px-3 py-4 md:py-5 rounded-[20px] shadow-sm flex flex-col items-center justify-center text-center hover:border-teal-200 hover:shadow-md transition-all duration-300 min-h-[100px] md:min-h-[120px]">
                     <div className="w-10 h-10 md:w-12 md:h-12 bg-teal-50 text-xl md:text-2xl rounded-xl md:rounded-2xl flex items-center justify-center mb-2 md:mb-3 shadow-sm text-teal-600">
                       <ClipboardList size={24} />
                     </div>
 
-                    <div className="text-[10px] md:text-[11px] text-slate-500 font-semibold tracking-widest uppercase mb-1 md:mb-1.5">
+                    <div className="text-[10px] md:text-[11px] text-[var(--text-muted)] font-semibold tracking-widest uppercase mb-1 md:mb-1.5">
                       Latihan
                     </div>
 
-                    <div className="text-xl md:text-2xl font-bold text-slate-800 leading-none">
+                    <div className="text-xl md:text-2xl font-bold text-[var(--text)] leading-none">
                       {loading ? "..." : totalExams}
                     </div>
 
-                    <div className="text-[10px] md:text-xs text-slate-400 mt-1 md:mt-2 leading-relaxed">
+                    <div className="text-[10px] md:text-xs text-[var(--text-muted)] mt-1 md:mt-2 leading-relaxed">
                       Ujian selesai
                     </div>
                   </div>
 
-                  <div className="bg-white border border-slate-200 px-3 py-4 md:py-5 rounded-[20px] shadow-sm flex flex-col items-center justify-center text-center hover:border-orange-200 hover:shadow-md transition-all duration-300 min-h-[100px] md:min-h-[120px]">
+                  <div className="bg-[var(--surface)] border border-[var(--border)] px-3 py-4 md:py-5 rounded-[20px] shadow-sm flex flex-col items-center justify-center text-center hover:border-orange-200 hover:shadow-md transition-all duration-300 min-h-[100px] md:min-h-[120px]">
                     <div className="w-10 h-10 md:w-12 md:h-12 bg-orange-50 text-xl md:text-2xl rounded-xl md:rounded-2xl flex items-center justify-center mb-2 md:mb-3 shadow-sm text-orange-600">
                       <BarChart2 size={24} />
                     </div>
 
-                    <div className="text-[10px] md:text-[11px] text-slate-500 font-semibold tracking-widest uppercase mb-1 md:mb-1.5">
+                    <div className="text-[10px] md:text-[11px] text-[var(--text-muted)] font-semibold tracking-widest uppercase mb-1 md:mb-1.5">
                       Skor IRT
                     </div>
 
-                    <div className="text-xl md:text-2xl font-bold text-slate-800 leading-none">
+                    <div className="text-xl md:text-2xl font-bold text-[var(--text)] leading-none">
                       {loading ? "..." : (avgScore || "—")}
                     </div>
 
-                    <div className="text-[10px] md:text-xs text-slate-400 mt-1 md:mt-2 leading-relaxed">
+                    <div className="text-[10px] md:text-xs text-[var(--text-muted)] mt-1 md:mt-2 leading-relaxed">
                       Rata-rata 0–1000
                     </div>
                   </div>
 
-                  <div className="bg-white border border-slate-200 px-3 py-4 md:py-5 rounded-[20px] shadow-sm flex flex-col items-center justify-center text-center hover:border-indigo-200 hover:shadow-md transition-all duration-300 min-h-[100px] md:min-h-[120px]">
+                  <div className="bg-[var(--surface)] border border-[var(--border)] px-3 py-4 md:py-5 rounded-[20px] shadow-sm flex flex-col items-center justify-center text-center hover:border-indigo-200 hover:shadow-md transition-all duration-300 min-h-[100px] md:min-h-[120px]">
                     <div className="w-10 h-10 md:w-12 md:h-12 bg-indigo-50 text-xl md:text-2xl rounded-xl md:rounded-2xl flex items-center justify-center mb-2 md:mb-3 shadow-sm text-indigo-600">
                       <Medal size={24} />
                     </div>
 
-                    <div className="text-[10px] md:text-[11px] text-slate-500 font-semibold tracking-widest uppercase mb-1 md:mb-1.5">
+                    <div className="text-[10px] md:text-[11px] text-[var(--text-muted)] font-semibold tracking-widest uppercase mb-1 md:mb-1.5">
                       Ranking
                     </div>
 
-                    <div className="text-xl md:text-2xl font-bold text-slate-800 leading-none">
+                    <div className="text-xl md:text-2xl font-bold text-[var(--text)] leading-none">
                       —
                     </div>
 
-                    <div className="text-[10px] md:text-xs text-slate-400 mt-1 md:mt-2 leading-relaxed">
+                    <div className="text-[10px] md:text-xs text-[var(--text-muted)] mt-1 md:mt-2 leading-relaxed">
                       Belum ada data
                     </div>
                   </div>
 
-                  <div className="bg-white border border-slate-200 px-3 py-4 md:py-5 rounded-[20px] shadow-sm flex flex-col items-center justify-center text-center hover:border-rose-200 hover:shadow-md transition-all duration-300 min-h-[100px] md:min-h-[120px]">
+                  <div className="bg-[var(--surface)] border border-[var(--border)] px-3 py-4 md:py-5 rounded-[20px] shadow-sm flex flex-col items-center justify-center text-center hover:border-rose-200 hover:shadow-md transition-all duration-300 min-h-[100px] md:min-h-[120px]">
                     <div className="w-10 h-10 md:w-12 md:h-12 bg-rose-50 text-xl md:text-2xl rounded-xl md:rounded-2xl flex items-center justify-center mb-2 md:mb-3 shadow-sm text-rose-600">
                       <Trophy size={24} />
                     </div>
 
-                    <div className="text-[10px] md:text-[11px] text-slate-500 font-semibold tracking-widest uppercase mb-1 md:mb-1.5">
+                    <div className="text-[10px] md:text-[11px] text-[var(--text-muted)] font-semibold tracking-widest uppercase mb-1 md:mb-1.5">
                       Turnamen
                     </div>
 
-                    <div className="text-xl md:text-2xl font-bold text-slate-800 leading-none">
+                    <div className="text-xl md:text-2xl font-bold text-[var(--text)] leading-none">
                       —
                     </div>
 
-                    <div className="text-[10px] md:text-xs text-slate-400 mt-1 md:mt-2 leading-relaxed">
+                    <div className="text-[10px] md:text-xs text-[var(--text-muted)] mt-1 md:mt-2 leading-relaxed">
                       Peringkat terbaik
                     </div>
                   </div>
                 </div>
 
                 {/* CHART */}
-                <div className="bg-white border border-slate-200 rounded-2xl md:rounded-3xl shadow-sm overflow-hidden min-h-[260px]">
-                  <div className="p-4 md:p-5 border-b border-slate-100 flex justify-between items-center gap-4">
-                    <span className="font-bold text-slate-800 text-[14px] md:text-[15px] tracking-wide flex items-center gap-2"><TrendingUp size={18} className="text-teal-600" /> Perkembangan Skor</span>
-                    <div className="flex bg-slate-100 p-1 md:p-1.5 rounded-xl shrink-0 ">
-                      <button className={`px-2.5 py-1 text-[11px] md:text-xs font-semibold rounded-md transition-colors ${chartMode === "skor" ? "bg-white text-teal-600 shadow-sm" : "text-slate-500 hover:text-slate-700"}`} onClick={() => setChartMode("skor")}>Skor IRT</button>
-                      <button className={`px-2.5 py-1 text-[11px] md:text-xs font-semibold rounded-md transition-colors ${chartMode === "persen" ? "bg-white text-teal-600 shadow-sm" : "text-slate-500 hover:text-slate-700"}`} onClick={() => setChartMode("persen")}>Persen</button>
+                <div className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl md:rounded-3xl shadow-sm overflow-hidden min-h-[260px]">
+                  <div className="p-4 md:p-5 border-b border-[var(--border)] flex justify-between items-center gap-4">
+                    <span className="font-bold text-[var(--text)] text-[14px] md:text-[15px] tracking-wide flex items-center gap-2"><TrendingUp size={18} className="text-teal-600" /> Perkembangan Skor</span>
+                    <div className="flex bg-[var(--bg-alt)] p-1 md:p-1.5 rounded-xl shrink-0 ">
+                      <button className={`px-2.5 py-1 text-[11px] md:text-xs font-semibold rounded-md transition-colors ${chartMode === "skor" ? "bg-[var(--surface)] text-teal-600 shadow-sm" : "text-[var(--text-muted)] hover:text-[var(--text-secondary)]"}`} onClick={() => setChartMode("skor")}>Skor IRT</button>
+                      <button className={`px-2.5 py-1 text-[11px] md:text-xs font-semibold rounded-md transition-colors ${chartMode === "persen" ? "bg-[var(--surface)] text-teal-600 shadow-sm" : "text-[var(--text-muted)] hover:text-[var(--text-secondary)]"}`} onClick={() => setChartMode("persen")}>Persen</button>
                     </div>
                   </div>
                   <div className="h-48 md:h-56 px-3 md:px-5 pb-3 md:pb-5 pt-2 md:pt-3">
                     {loading ? (
-                      <div className="w-full h-full flex items-center justify-center text-slate-400 text-sm">Memuat data...</div>
+                      <div className="w-full h-full flex items-center justify-center text-[var(--text-muted)] text-sm">Memuat data...</div>
                     ) : chartData.length > 0 ? (
                       <ResponsiveContainer width="100%" height="100%">
                         <AreaChart data={chartData} margin={{ top: 20, right: 20, left: 10, bottom: 10 }}>
@@ -606,15 +606,15 @@ export default function DashboardLayout() {
                         </AreaChart>
                       </ResponsiveContainer>
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center text-slate-400 text-sm">Belum ada riwayat ujian</div>
+                      <div className="w-full h-full flex items-center justify-center text-[var(--text-muted)] text-sm">Belum ada riwayat ujian</div>
                     )}
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* RADAR */}
-                  <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden flex flex-col">
-                    <div className="p-4 md:p-5 border-b border-slate-100"><span className="font-bold text-slate-800 text-[14px] md:text-[15px] flex items-center gap-2"><Hexagon size={18} className="text-teal-600" /> Peta Kemampuan</span></div>
+                  <div className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl shadow-sm overflow-hidden flex flex-col">
+                    <div className="p-4 md:p-5 border-b border-[var(--border)]"><span className="font-bold text-[var(--text)] text-[14px] md:text-[15px] flex items-center gap-2"><Hexagon size={18} className="text-teal-600" /> Peta Kemampuan</span></div>
                     <div className="flex-1 p-3 md:p-4 min-h-[200px]">
                       <ResponsiveContainer width="100%" height="100%">
                         <RadarChart cx="50%" cy="50%" outerRadius="65%" data={radarData}>
@@ -633,12 +633,12 @@ export default function DashboardLayout() {
                   </div>
 
                   {/* PERFORMA MAPEL */}
-                  <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden flex flex-col">
-                    <div className="p-4 md:p-5 border-b border-slate-100"><span className="font-bold text-slate-800 text-[14px] md:text-[15px] flex items-center gap-2"><Target size={18} className="text-teal-600" /> Performa Mapel</span></div>
+                  <div className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl shadow-sm overflow-hidden flex flex-col">
+                    <div className="p-4 md:p-5 border-b border-[var(--border)]"><span className="font-bold text-[var(--text)] text-[14px] md:text-[15px] flex items-center gap-2"><Target size={18} className="text-teal-600" /> Performa Mapel</span></div>
                     <div className="flex-1 p-4 md:p-5">
                       <div className="flex flex-wrap gap-1.5 md:gap-2 mb-4">
                         {["semua", "matematika", "b.indo", "b.inggris", "fisika", "kimia", "biologi"].map(p => (
-                          <button key={p} className={`px-3 py-1 text-xs font-semibold rounded-full border ${activePill === p ? "bg-teal-50 border-teal-200 text-teal-700" : "bg-white border-slate-200 text-slate-500 hover:bg-slate-50"}`} onClick={() => setActivePill(p)}>
+                          <button key={p} className={`px-3 py-1 text-xs font-semibold rounded-full border ${activePill === p ? "bg-teal-50 border-teal-200 text-teal-700" : "bg-[var(--surface)] border-[var(--border)] text-[var(--text-muted)] hover:bg-[var(--surface-hover)]"}`} onClick={() => setActivePill(p)}>
                             {p === "semua" ? "Semua" : p === "b.indo" ? "B. Indo" : p === "b.inggris" ? "B. Inggris" : p.charAt(0).toUpperCase() + p.slice(1)}
                           </button>
                         ))}
@@ -647,10 +647,10 @@ export default function DashboardLayout() {
                         {mapelData.filter(p => activePill === "semua" || p.name.toLowerCase().includes(activePill.replace(".", ""))).map((p, i) => (
                           <div key={i}>
                             <div className="flex justify-between text-xs font-semibold mb-1">
-                              <span className="text-slate-700">{p.icon} {p.name}</span>
-                              <span className="text-slate-500">{p.val}/100</span>
+                              <span className="text-[var(--text-secondary)]">{p.icon} {p.name}</span>
+                              <span className="text-[var(--text-muted)]">{p.val}/100</span>
                             </div>
-                            <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                            <div className="w-full bg-[var(--bg-alt)] h-2 rounded-full overflow-hidden">
                               <div className={`h-full rounded-full transition-all duration-500 ${p.warn ? "bg-orange-400" : "bg-teal-500"}`} style={{ width: mounted ? `${p.val}%` : '0%' }}></div>
                             </div>
                           </div>
@@ -670,11 +670,11 @@ export default function DashboardLayout() {
         {/* ========================================== */}
         {/* KOLOM KANAN: STICKY, DENGAN GARIS PEMISAH    */}
         {/* ========================================== */}
-        <aside className="hidden lg:block lg:col-span-4 sticky top-8 h-fit border-l border-slate-200 pl-7 space-y-4">
+        <aside className="hidden lg:block lg:col-span-4 sticky top-8 h-fit border-l border-[var(--border)] pl-7 space-y-4">
 
           {/* Kartu Premium */}
           {user?.role === 'STUDENT' && (
-            <div className="bg-white border border-slate-200 rounded-2xl flex flex-col gap-3 md:gap-4 p-4 md:p-5">
+            <div className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl flex flex-col gap-3 md:gap-4 p-4 md:p-5">
 
               {/* Header */}
               <div className="flex items-center gap-3">
@@ -684,13 +684,13 @@ export default function DashboardLayout() {
                   </svg>
                 </div>
                 <div>
-                  <p className="text-[15px] font-bold text-slate-800 leading-tight">Upgrade Premium</p>
-                  <p className="text-xs text-slate-400 leading-tight">Akses tak terbatas</p>
+                  <p className="text-[15px] font-bold text-[var(--text)] leading-tight">Upgrade Premium</p>
+                  <p className="text-xs text-[var(--text-muted)] leading-tight">Akses tak terbatas</p>
                 </div>
               </div>
 
               {/* Fitur */}
-              <div className="border-t border-slate-100 pt-3 flex flex-col gap-2">
+              <div className="border-t border-[var(--border)] pt-3 flex flex-col gap-2">
                 {[
                   "Tryout premium tak terbatas",
                   "Pembahasan lengkap & video",
@@ -700,7 +700,7 @@ export default function DashboardLayout() {
                     <svg className="w-4 h-4 text-teal-500 shrink-0" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
-                    <span className="text-[13px] text-slate-500">{item}</span>
+                    <span className="text-[13px] text-[var(--text-muted)]">{item}</span>
                   </div>
                 ))}
               </div>
@@ -720,13 +720,13 @@ export default function DashboardLayout() {
           )}
 
           {/* Runtutan / Timeline Aktivitas */}
-          <div className="bg-white border border-slate-200 rounded-2xl shadow-sm p-4">
+          <div className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl shadow-sm p-4">
 
             {/* Header */}
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-bold text-slate-800 text-[14px] flex items-center gap-2">
-                <div className="w-7 h-7 rounded-lg bg-slate-100 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <h3 className="font-bold text-[var(--text)] text-[14px] flex items-center gap-2">
+                <div className="w-7 h-7 rounded-lg bg-[var(--bg-alt)] flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-[var(--text-muted)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
@@ -734,7 +734,7 @@ export default function DashboardLayout() {
               </h3>
 
               {/* UBAH: plain text → pill badge */}
-              <span className="text-[11px] font-medium text-slate-400 bg-slate-100 rounded-full px-2.5 py-1">
+              <span className="text-[11px] font-medium text-[var(--text-muted)] bg-[var(--bg-alt)] rounded-full px-2.5 py-1">
                 {recentExams.length} aktivitas
               </span>
             </div>
@@ -746,7 +746,7 @@ export default function DashboardLayout() {
               <div className="space-y-3">
 
                 {loading ? (
-                  <div className="text-xs text-slate-400 py-1 pl-2">
+                  <div className="text-xs text-[var(--text-muted)] py-1 pl-2">
                     Memuat aktivitas...
                   </div>
                 ) : recentExams.length > 0 ? (
@@ -765,11 +765,11 @@ export default function DashboardLayout() {
 
                       {/* Kolom kanan: card */}
                       <div className="flex-1 pb-0">
-                        <div className="bg-slate-50 border border-slate-100 rounded-xl px-3.5 py-2.5 hover:bg-white hover:shadow-sm transition-all duration-200">
-                          <h4 className="font-semibold text-[12.5px] text-slate-700 leading-snug">
+                        <div className="bg-[var(--bg-alt)] border border-[var(--border)] rounded-xl px-3.5 py-2.5 hover:bg-[var(--surface)] hover:shadow-sm transition-all duration-200">
+                          <h4 className="font-semibold text-[12.5px] text-[var(--text-secondary)] leading-snug">
                             {exam.title}
                           </h4>
-                          <p className="text-[11px] text-slate-400 mt-1.5 leading-none">
+                          <p className="text-[11px] text-[var(--text-muted)] mt-1.5 leading-none">
                             {new Date(exam.startedAt).toLocaleDateString("id-ID", {
                               day: "numeric",
                               month: "long",
@@ -791,11 +791,11 @@ export default function DashboardLayout() {
                       <div className="w-3 h-3 rounded-full bg-slate-300 ring-2 ring-slate-100" />
                     </div>
                     <div className="flex-1">
-                      <div className="bg-slate-50 border border-slate-100 rounded-xl px-3.5 py-2.5">
-                        <h4 className="font-semibold text-[12.5px] text-slate-700 leading-snug">
+                      <div className="bg-[var(--bg-alt)] border border-[var(--border)] rounded-xl px-3.5 py-2.5">
+                        <h4 className="font-semibold text-[12.5px] text-[var(--text-secondary)] leading-snug">
                           Belum ada aktivitas
                         </h4>
-                        <p className="text-[11px] text-slate-400 mt-1.5 leading-none flex items-center gap-1">
+                        <p className="text-[11px] text-[var(--text-muted)] mt-1.5 leading-none flex items-center gap-1">
                           Ayo mulai belajar hari ini <Rocket size={12} className="text-teal-500" />
                         </p>
                       </div>

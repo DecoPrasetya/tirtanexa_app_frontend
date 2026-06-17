@@ -44,7 +44,7 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-slate-50 py-12">
+    <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-[var(--bg-alt)] py-12">
       {/* ===== DYNAMIC BACKGROUND ===== */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Orange Orb */}
@@ -86,7 +86,7 @@ export default function RegisterPage() {
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         className="relative z-10 w-[95%] max-w-[640px]"
       >
-        <div className="bg-white/80 backdrop-blur-2xl rounded-[32px] py-12 px-8 sm:py-16 sm:px-28 shadow-[0_8px_32px_rgba(0,0,0,0.04)] border border-white">
+        <div className="bg-[var(--surface)]/80 backdrop-blur-2xl rounded-[32px] py-12 px-8 sm:py-16 sm:px-28 shadow-[0_8px_32px_rgba(0,0,0,0.04)] border border-[var(--surface)]">
           
           {/* Brand Header */}
           <div className="flex flex-col items-center mb-8 text-center">

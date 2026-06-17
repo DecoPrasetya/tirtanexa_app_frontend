@@ -58,6 +58,7 @@ export default function DashboardLayout({
   const { user, isInitialized, initialize, logout } = useAuthStore();
   const [sbOpen, setSbOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
   const role = user?.role || "STUDENT";
 
   useEffect(() => {
@@ -77,7 +78,7 @@ export default function DashboardLayout({
 
   if (!isInitialized || !user) {
     return (
-      <div className="min-h-screen bg-[#f5f7fa] flex items-center justify-center">
+      <div className="min-h-screen bg-[var(--bg)] flex items-center justify-center">
         {/* Loading Spinner */}
         <div className="flex flex-col items-center gap-4">
           <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0d8a8e] to-[#2dd4bf] flex items-center justify-center text-white font-bold text-xl animate-pulse">T</div>
@@ -86,14 +87,13 @@ export default function DashboardLayout({
             <div className="w-2 h-2 rounded-full bg-[#14b8a6] animate-pulse [animation-delay:150ms]" />
             <div className="w-2 h-2 rounded-full bg-[#14b8a6] animate-pulse [animation-delay:300ms]" />
           </div>
-          <p className="text-sm text-[#9ca3af]">Memuat dashboard...</p>
+          <p className="text-sm text-[var(--text-muted)]">Memuat dashboard...</p>
         </div>
       </div>
     );
   }
 
   const closeSb = () => setSbOpen(false);
-  const doLogout = () => { logout(); router.push("/login"); };
 
   const dpName = user?.fullName || "User";
   const dpInitials = dpName.split(" ").map(n => n[0]).join("").substring(0, 2).toUpperCase();
@@ -131,14 +131,14 @@ export default function DashboardLayout({
               <input
                 type="text"
                 placeholder="Cari soal, materi..."
-                className="w-full pl-14 pr-6 py-4 rounded-full bg-white text-slate-800 text-base font-medium placeholder:text-slate-400 border-2 border-transparent focus:border-teal-500 focus:outline-none shadow-2xl transition-colors"
+                className="w-full pl-14 pr-6 py-4 rounded-full bg-[var(--surface)] text-[var(--text)] text-base font-medium placeholder:text-[var(--text-muted)] border-2 border-transparent focus:border-teal-500 focus:bg-[var(--surface)] focus:outline-none shadow-2xl transition-colors"
                 autoFocus
               />
             </div>
           </div>
           <button
             onClick={() => setSearchOpen(false)}
-            className="mt-8 text-white/80 font-semibold text-sm bg-white/10 px-5 py-2 rounded-full hover:bg-white/20 transition-colors"
+            className="mt-8 text-white/80 font-semibold text-sm bg-[var(--surface)]/10 px-5 py-2 rounded-full hover:bg-[var(--surface)]/20 transition-colors"
           >
             Tutup Pencarian
           </button>
@@ -176,14 +176,14 @@ export default function DashboardLayout({
         <div className="sb-foot">
           <div className="uav">{dpInitials}</div>
           <div><span className="uname">{dpName}</span><span className="ubadge capitalize">{role.toLowerCase()}</span></div>
-          <button className="uout flex items-center justify-center text-[var(--text-muted)] hover:text-red-500" onClick={doLogout}><LogOut size={20} /></button>
+          <button className="uout flex items-center justify-center text-[var(--text-muted)] hover:text-red-500" onClick={() => setShowLogoutModal(true)}><LogOut size={20} /></button>
         </div>
       </aside>
 
       {/* MAIN WRAP */}
       <div className="mainwrap flex flex-col h-screen overflow-hidden">
         {/* Mobile topbar */}
-        <header className="topbar sticky top-0 z-50 bg-white shadow-sm shrink-0 lg:hidden flex items-center">
+        <header className="topbar sticky top-0 z-50 bg-[var(--surface)] shadow-sm shrink-0 lg:hidden flex items-center">
           <button className="ham flex items-center justify-center" onClick={() => setSbOpen(true)}><Menu size={24} /></button>
           <div className="tbar-brand">
             <div className="lmark">T</div>
@@ -199,9 +199,9 @@ export default function DashboardLayout({
         </header>
 
         {/* Desktop topbar */}
-        <div className="dtopbar hidden lg:flex sticky top-0 z-50 bg-[#f5f7fa]/95 backdrop-blur-md shrink-0 py-3 border-b border-slate-200/50">
-          <span className="dtitle">Dashboard</span>
-          <div className="dsearch"><span style={{color:"var(--gray-400)"}}><Search size={16} /></span><input placeholder="Cari soal, materi..." /></div>
+        <div className="dtopbar hidden lg:flex sticky top-0 z-50 bg-[var(--bg)]/95 backdrop-blur-md shrink-0 py-3 border-b border-[var(--border)]">
+          <div className="dtitle">Dashboard</div>
+          <div className="dsearch"><span style={{color:"var(--text-muted)"}}><Search size={16} /></span><input placeholder="Cari soal, materi..." style={{ backgroundColor: 'transparent', color: 'var(--text)' }} /></div>
           <div style={{display:"flex", gap:"8px", alignItems:"center"}}>
             <button className="icobtn flex items-center justify-center"><Bell size={20} /></button>
             <Link href="/dashboard/profile" className="tav hover:opacity-80 transition-opacity cursor-pointer">
@@ -216,7 +216,7 @@ export default function DashboardLayout({
         </main>
 
         {/* BOTTOM NAV */}
-        <nav className="bnav shrink-0 z-50 bg-white">
+        <nav className="bnav shrink-0 z-50 bg-[var(--surface)]">
           <div className="bninner">
             {filteredItems.slice(0, 5).map(item => (
               <Link 
@@ -232,6 +232,37 @@ export default function DashboardLayout({
           </div>
         </nav>
       </div>
+
+      {/* LOGOUT CONFIRMATION MODAL */}
+      {showLogoutModal && (
+        <div className="fixed inset-0 z-[9999] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 animate-fade-in">
+          <div className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-6 w-full max-w-sm shadow-xl flex flex-col items-center text-center">
+            <div className="w-12 h-12 bg-red-100 dark:bg-red-500/10 text-red-500 rounded-full flex items-center justify-center mb-4">
+              <LogOut size={24} />
+            </div>
+            <h3 className="text-lg font-bold text-[var(--text)] mb-2">Konfirmasi Logout</h3>
+            <p className="text-[var(--text-muted)] text-sm mb-6">Apakah Anda yakin ingin keluar dari sesi ini?</p>
+            <div className="flex w-full gap-3">
+              <button 
+                className="flex-1 py-2.5 rounded-xl border border-[var(--border)] text-[var(--text-secondary)] font-semibold hover:bg-[var(--surface-hover)] hover:text-[var(--text)] transition-colors"
+                onClick={() => setShowLogoutModal(false)}
+              >
+                Batal
+              </button>
+              <button 
+                className="flex-1 py-2.5 rounded-xl bg-red-500 text-white font-semibold hover:bg-red-600 shadow-md shadow-red-500/20 transition-all"
+                onClick={() => {
+                  setShowLogoutModal(false);
+                  logout();
+                  router.push("/login");
+                }}
+              >
+                Ya, Keluar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

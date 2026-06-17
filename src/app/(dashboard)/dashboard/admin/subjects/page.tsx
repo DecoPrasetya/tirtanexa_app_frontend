@@ -97,7 +97,7 @@ export default function AdminSubjectsPage() {
 
           {/* MENU */}
           {openDropdown && (
-            <div className="absolute top-full left-0 mt-2 w-48 rounded-2xl bg-white border border-slate-200 shadow-xl p-2 z-50"
+            <div className="absolute top-full left-0 mt-2 w-48 rounded-2xl bg-[var(--surface)] border border-[var(--border)] shadow-xl p-2 z-50"
               style={{ position: "absolute", top: "100%", left: 0, marginTop: "12px", width: "200px", borderRadius: "16px", backgroundColor: "#ffffff", border: "1px solid #e2e8f0", boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)", padding: "8px", zIndex: 50 }}>
 
               <div className="flex flex-col space-y-1" style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
@@ -111,7 +111,7 @@ export default function AdminSubjectsPage() {
                     }}
                     className={`w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 border-none cursor-pointer ${selectedCategory === cat
                       ? "bg-teal-50 text-teal-700"
-                      : "bg-transparent hover:bg-slate-50 text-slate-700"
+                      : "bg-transparent hover:bg-[var(--surface-hover)] text-[var(--text-secondary)]"
                       }`}
                     style={{ width: "100%", textAlign: "left", padding: "10px 16px", borderRadius: "12px", fontSize: "15px", fontWeight: 600, border: "none", cursor: "pointer", transition: "all 0.2s", backgroundColor: selectedCategory === cat ? "#f0fdfa" : "transparent", color: selectedCategory === cat ? "#0f766e" : "#334155" }}
                   >
@@ -132,7 +132,7 @@ export default function AdminSubjectsPage() {
           {Array.from({ length: 6 }).map((_, i) => (
             <div
               key={i}
-              className="h-32 rounded-3xl animate-pulse bg-slate-100"
+              className="h-32 rounded-3xl animate-pulse bg-[var(--bg-alt)]"
             />
           ))}
         </div>
@@ -185,7 +185,7 @@ export default function AdminSubjectsPage() {
 
                 <div className="flex-1"></div>
 
-                <div className="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between">
+                <div className="mt-5 pt-4 border-t border-[var(--border)] flex items-center justify-between">
 
                   <p className="text-sm text-[var(--text-muted)]">
                     {s._count?.chapters || 0} bab

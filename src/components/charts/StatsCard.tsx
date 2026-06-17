@@ -40,8 +40,8 @@ export default function StatsCard({
       `}
     >
       {/* Background decoration */}
-      <div className="absolute -right-4 -top-4 w-24 h-24 rounded-full bg-white/10" />
-      <div className="absolute -right-8 -bottom-8 w-32 h-32 rounded-full bg-white/5" />
+      <div className="absolute -right-4 -top-4 w-24 h-24 rounded-full bg-[var(--surface)]/10" />
+      <div className="absolute -right-8 -bottom-8 w-32 h-32 rounded-full bg-[var(--surface)]/5" />
 
       <div className="relative z-10 flex items-start justify-between">
         <div className="flex flex-col gap-1">
@@ -55,7 +55,7 @@ export default function StatsCard({
               <span
                 className={`text-xs font-semibold px-2 py-0.5 rounded-full ${
                   trend.isPositive
-                    ? "bg-white/20 text-white"
+                    ? "bg-[var(--surface)]/20 text-white"
                     : "bg-red-400/30 text-red-100"
                 }`}
               >
@@ -67,7 +67,7 @@ export default function StatsCard({
           )}
         </div>
 
-        <div className="p-3 rounded-[var(--radius-lg)] bg-white/15 backdrop-blur-sm">
+        <div className="p-3 rounded-[var(--radius-lg)] bg-[var(--surface)]/15 backdrop-blur-sm">
           <Icon size={24} />
         </div>
       </div>

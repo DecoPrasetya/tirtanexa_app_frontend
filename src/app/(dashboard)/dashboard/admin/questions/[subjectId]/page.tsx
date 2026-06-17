@@ -79,7 +79,7 @@ export default function AdminChaptersInSubjectPage({ params }: PageProps) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.04 }}
             >
-              <Card padding="none" className="rounded-3xl border border-slate-200 hover:border-teal-500 hover:shadow-md transition-all duration-300 h-full flex flex-col p-5">
+              <Card padding="none" className="rounded-3xl border border-[var(--border)] hover:border-teal-500 hover:shadow-md transition-all duration-300 h-full flex flex-col p-5">
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-2xl bg-teal-50 text-teal-600 flex items-center justify-center shrink-0">
                     <FolderOpen size={24} />
@@ -93,7 +93,7 @@ export default function AdminChaptersInSubjectPage({ params }: PageProps) {
                   </div>
                 </div>
                 
-                <div className="mt-4 pt-4 border-t border-slate-100 flex justify-end">
+                <div className="mt-4 pt-4 border-t border-[var(--border)] flex justify-end">
                   <Link href={`/dashboard/admin/questions/${subjectId}/${chapter.id}`} className="text-sm font-semibold text-teal-600 hover:text-teal-700 transition-colors bg-transparent border-none" style={{ textDecoration: "none" }}>
                     Buka Folder Bab →
                   </Link>

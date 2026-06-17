@@ -51,7 +51,7 @@ export default function AdminQuestionDetailPage({ params }: PageProps) {
       </div>
 
       <Card padding="lg" className="space-y-6">
-        <div className="flex justify-between items-start gap-4 border-b border-slate-100 pb-4">
+        <div className="flex justify-between items-start gap-4 border-b border-[var(--border)] pb-4">
           <h3 className="text-lg font-medium text-[var(--text)] leading-relaxed flex-1 whitespace-pre-wrap">
             {question.content}
           </h3>
@@ -63,11 +63,11 @@ export default function AdminQuestionDetailPage({ params }: PageProps) {
         <div className="space-y-3 pt-2">
           <h4 className="text-sm font-semibold text-[var(--text-secondary)]">Opsi Jawaban:</h4>
           {question.options?.map((opt) => (
-            <div key={opt.id} className={`flex items-start gap-3 p-4 rounded-xl border ${opt.isCorrect ? 'border-teal-200 bg-teal-50' : 'border-slate-100 bg-slate-50'}`}>
-              <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${opt.isCorrect ? 'bg-teal-500 text-white' : 'bg-slate-200 text-slate-500'}`}>
+            <div key={opt.id} className={`flex items-start gap-3 p-4 rounded-xl border ${opt.isCorrect ? 'border-teal-200 bg-teal-50' : 'border-[var(--border)] bg-[var(--bg-alt)]'}`}>
+              <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${opt.isCorrect ? 'bg-teal-500 text-white' : 'bg-slate-200 text-[var(--text-muted)]'}`}>
                 <span className="text-xs font-bold">{opt.label}</span>
               </div>
-              <p className={`text-sm flex-1 ${opt.isCorrect ? 'text-teal-900 font-medium' : 'text-slate-700'}`}>
+              <p className={`text-sm flex-1 ${opt.isCorrect ? 'text-teal-900 font-medium' : 'text-[var(--text-secondary)]'}`}>
                 {opt.content}
               </p>
               {opt.isCorrect && <CheckCircle2 size={18} className="text-teal-600 shrink-0" />}
@@ -76,7 +76,7 @@ export default function AdminQuestionDetailPage({ params }: PageProps) {
         </div>
 
         {question.explanation && (
-          <div className="pt-6 border-t border-slate-100">
+          <div className="pt-6 border-t border-[var(--border)]">
             <h4 className="text-sm font-semibold text-[var(--text-secondary)] mb-2">Pembahasan:</h4>
             <div className="p-4 rounded-xl bg-violet-50 text-violet-900 text-sm leading-relaxed whitespace-pre-wrap">
               {question.explanation}

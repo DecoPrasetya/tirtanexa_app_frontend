@@ -68,6 +68,34 @@
   --topbar-height: 68px;
 }
 
+/* ============ DARK THEME TOKENS ============ */
+.dark {
+  /* Primary & Accent (Adjusted slightly for dark mode contrast if needed, but keeping original mostly) */
+  --teal: #2DB8BB;
+  --teal-dark: #219B9E;
+  --teal-light: #C5EDED;
+  --teal-50: #1A3E40;
+  
+  --orange: #D4733E;
+  --orange-dark: #B3531E;
+  
+  /* Surfaces */
+  --bg: #0f172a;
+  --bg-alt: #1e293b;
+  --surface: #1e293b;
+  --surface-hover: #334155;
+
+  /* Text */
+  --text: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-inverse: #0f172a;
+
+  /* Borders */
+  --border: #334155;
+  --border-hover: #475569;
+}
+
 /* ============ TAILWIND THEME ============ */
 @theme {
   --color-teal: var(--teal);

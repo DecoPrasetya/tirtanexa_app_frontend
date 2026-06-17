@@ -23,8 +23,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id" className={`h-full ${nunito.variable}`}>
-      <body className="min-h-full antialiased font-nunito">
+    <html lang="id" className={`h-full ${nunito.variable}`} suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                  document.documentElement.classList.add('dark')
+                } else {
+                  document.documentElement.classList.remove('dark')
+                }
+              } catch (_) {}
+            `,
+          }}
+        />
+      </head>
+      <body className="min-h-full antialiased font-nunito bg-[var(--bg)] text-[var(--text)]">
         {children}
         <Toaster
           position="top-right"

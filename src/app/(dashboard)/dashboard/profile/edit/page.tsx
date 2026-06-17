@@ -111,8 +111,8 @@ export default function EditProfilePage() {
 
       <form onSubmit={handleSave} className="space-y-5">
         {/* PERSONAL INFO */}
-        <section className="bg-white border border-slate-300 rounded-2xl p-5">
-          <h2 className="font-bold text-slate-800 mb-4 text-[15px]">Informasi Pribadi</h2>
+        <section className="bg-[var(--surface)] border border-[var(--border-hover)] rounded-2xl p-5">
+          <h2 className="font-bold text-[var(--text)] mb-4 text-[15px]">Informasi Pribadi</h2>
           
           {error && (
             <div className="mb-4 p-3 bg-red-50 text-red-600 rounded-xl text-sm border border-red-200">
@@ -122,45 +122,45 @@ export default function EditProfilePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>
-              <label className="block text-[12px] font-semibold text-slate-700 mb-2">Nama Lengkap</label>
+              <label className="block text-[12px] font-semibold text-[var(--text-secondary)] mb-2">Nama Lengkap</label>
               <input 
                 type="text" 
                 value={fullName}
                 onChange={e => setFullName(e.target.value)}
                 placeholder="Masukkan nama" 
-                className="w-full rounded-lg border border-slate-300 focus:border-teal-500 p-2" 
+                className="w-full rounded-lg border border-[var(--border-hover)] focus:border-teal-500 p-2" 
                 required
               />
             </div>
             <div>
-              <label className="block text-[12px] font-semibold text-slate-700 mb-2">Email (Tidak dapat diubah)</label>
+              <label className="block text-[12px] font-semibold text-[var(--text-secondary)] mb-2">Email (Tidak dapat diubah)</label>
               <input 
                 type="email" 
                 value={user.email} 
                 disabled
-                className="w-full rounded-lg border border-slate-300 bg-slate-50 text-slate-500 p-2" 
+                className="w-full rounded-lg border border-[var(--border-hover)] bg-[var(--bg-alt)] text-[var(--text-muted)] p-2" 
               />
             </div>
 
             {isStudent && (
               <>
                 <div>
-                  <label className="block text-[12px] font-semibold text-slate-700 mb-2">No Telepon</label>
+                  <label className="block text-[12px] font-semibold text-[var(--text-secondary)] mb-2">No Telepon</label>
                   <input 
                     type="text" 
                     value={phone}
                     onChange={e => setPhone(e.target.value)}
                     placeholder="08xxxxxxxxxx" 
-                    className="w-full rounded-lg border border-slate-300 focus:border-teal-500 p-2" 
+                    className="w-full rounded-lg border border-[var(--border-hover)] focus:border-teal-500 p-2" 
                   />
                 </div>
                 <div>
-                  <label className="block text-[12px] font-semibold text-slate-700 mb-2">Tanggal Lahir</label>
+                  <label className="block text-[12px] font-semibold text-[var(--text-secondary)] mb-2">Tanggal Lahir</label>
                   <input 
                     type="date" 
                     value={birthDate}
                     onChange={e => setBirthDate(e.target.value)}
-                    className="w-full rounded-lg border border-slate-300 focus:border-teal-500 p-2" 
+                    className="w-full rounded-lg border border-[var(--border-hover)] focus:border-teal-500 p-2" 
                   />
                 </div>
               </>
@@ -170,37 +170,37 @@ export default function EditProfilePage() {
 
         {/* SCHOOL INFO (STUDENT ONLY) */}
         {isStudent && (
-          <section className="bg-white border border-slate-300 rounded-2xl p-5">
-            <h2 className="font-bold text-slate-800 mb-4 text-[15px]">Informasi Sekolah</h2>
+          <section className="bg-[var(--surface)] border border-[var(--border-hover)] rounded-2xl p-5">
+            <h2 className="font-bold text-[var(--text)] mb-4 text-[15px]">Informasi Sekolah</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div>
-                <label className="block text-[12px] font-semibold text-slate-700 mb-2">Asal Sekolah</label>
+                <label className="block text-[12px] font-semibold text-[var(--text-secondary)] mb-2">Asal Sekolah</label>
                 <input 
                   type="text" 
                   value={school}
                   onChange={e => setSchool(e.target.value)}
                   placeholder="Nama sekolah" 
-                  className="w-full rounded-lg border border-slate-300 focus:border-teal-500 p-2" 
+                  className="w-full rounded-lg border border-[var(--border-hover)] focus:border-teal-500 p-2" 
                 />
               </div>
               <div>
-                <label className="block text-[12px] font-semibold text-slate-700 mb-2">Kota / Kabupaten Domisili</label>
+                <label className="block text-[12px] font-semibold text-[var(--text-secondary)] mb-2">Kota / Kabupaten Domisili</label>
                 <input 
                   type="text" 
                   value={city}
                   onChange={e => setCity(e.target.value)}
                   placeholder="Misal: Jakarta Selatan" 
-                  className="w-full rounded-lg border border-slate-300 focus:border-teal-500 p-2" 
+                  className="w-full rounded-lg border border-[var(--border-hover)] focus:border-teal-500 p-2" 
                 />
               </div>
               <div>
-                <label className="block text-[12px] font-semibold text-slate-700 mb-2">Kelas / Tingkat</label>
+                <label className="block text-[12px] font-semibold text-[var(--text-secondary)] mb-2">Kelas / Tingkat</label>
                 <input 
                   type="text" 
                   value={grade}
                   onChange={e => setGrade(e.target.value)}
                   placeholder="Misal: Kelas 12 IPA" 
-                  className="w-full rounded-lg border border-slate-300 focus:border-teal-500 p-2" 
+                  className="w-full rounded-lg border border-[var(--border-hover)] focus:border-teal-500 p-2" 
                 />
               </div>
             </div>
@@ -208,7 +208,7 @@ export default function EditProfilePage() {
         )}
 
         <div className="flex justify-end gap-4 pt-2">
-          <Link href="/dashboard/profile" className="bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl px-5 py-2 font-bold transition-colors">
+          <Link href="/dashboard/profile" className="bg-[var(--bg-alt)] hover:bg-slate-200 text-[var(--text-secondary)] rounded-xl px-5 py-2 font-bold transition-colors">
             Batal
           </Link>
           <button 
@@ -224,8 +224,8 @@ export default function EditProfilePage() {
 
       {/* PASSWORD SECTION */}
       <form onSubmit={handlePasswordSave} className="mt-8">
-        <section className="bg-white border border-slate-300 rounded-2xl p-5">
-          <h2 className="font-bold text-slate-800 mb-4 text-[15px]">Ganti Password</h2>
+        <section className="bg-[var(--surface)] border border-[var(--border-hover)] rounded-2xl p-5">
+          <h2 className="font-bold text-[var(--text)] mb-4 text-[15px]">Ganti Password</h2>
           
           {passwordError && (
             <div className="mb-4 p-3 bg-red-50 text-red-600 rounded-xl text-sm border border-red-200">
@@ -240,33 +240,33 @@ export default function EditProfilePage() {
 
           <div className="space-y-3">
             <div>
-              <label className="block text-[12px] font-semibold text-slate-700 mb-2">Password Saat Ini</label>
+              <label className="block text-[12px] font-semibold text-[var(--text-secondary)] mb-2">Password Saat Ini</label>
               <input 
                 type="password" 
                 value={oldPassword}
                 onChange={e => setOldPassword(e.target.value)}
-                className="w-full rounded-lg border border-slate-300 focus:border-teal-500 p-2" 
+                className="w-full rounded-lg border border-[var(--border-hover)] focus:border-teal-500 p-2" 
                 required
               />
             </div>
             <div>
-              <label className="block text-[12px] font-semibold text-slate-700 mb-2">Password Baru</label>
+              <label className="block text-[12px] font-semibold text-[var(--text-secondary)] mb-2">Password Baru</label>
               <input 
                 type="password" 
                 value={newPassword}
                 onChange={e => setNewPassword(e.target.value)}
-                className="w-full rounded-lg border border-slate-300 focus:border-teal-500 p-2" 
+                className="w-full rounded-lg border border-[var(--border-hover)] focus:border-teal-500 p-2" 
                 required
                 minLength={8}
               />
             </div>
             <div>
-              <label className="block text-[12px] font-semibold text-slate-700 mb-2">Konfirmasi Password Baru</label>
+              <label className="block text-[12px] font-semibold text-[var(--text-secondary)] mb-2">Konfirmasi Password Baru</label>
               <input 
                 type="password" 
                 value={confirmPassword}
                 onChange={e => setConfirmPassword(e.target.value)}
-                className="w-full rounded-lg border border-slate-300 focus:border-teal-500 p-2" 
+                className="w-full rounded-lg border border-[var(--border-hover)] focus:border-teal-500 p-2" 
                 required
               />
             </div>

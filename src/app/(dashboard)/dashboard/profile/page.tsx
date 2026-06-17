@@ -33,6 +33,19 @@ export default function ProfilePage() {
   const [fullName, setFullName] = useState(user?.fullName || "");
   const [saving, setSaving] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    // Sync initial state
+    if (document.documentElement.classList.contains("dark")) {
+      setDarkMode(true);
+    }
+  }, []);
+
+  const toggleDarkMode = () => {
+    const isDark = document.documentElement.classList.toggle("dark");
+    setDarkMode(isDark);
+    localStorage.theme = isDark ? "dark" : "light";
+  };
   const [history, setHistory] = useState<ExamSession[]>([]);
   const [loadingHistory, setLoadingHistory] = useState(true);
 
@@ -89,7 +102,7 @@ export default function ProfilePage() {
                 {/* LEFT */}
                 <div className="flex flex-col sm:flex-row sm:items-start gap-5">
 
-                  <div className="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center shrink-0">
+                  <div className="w-16 h-16 rounded-2xl bg-[var(--surface)]/20 flex items-center justify-center shrink-0">
                     <Crown size={30} className="text-white" />
                   </div>
 
@@ -362,7 +375,7 @@ export default function ProfilePage() {
                     recentExams.map((exam) => (
                       <div
                         key={exam.id}
-                        className="rounded-2xl border border-[var(--border)] bg-slate-50 hover:bg-white transition-all duration-300 p-4"
+                        className="rounded-2xl border border-[var(--border)] bg-[var(--bg-alt)] hover:bg-[var(--surface)] transition-all duration-300 p-4"
                       >
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                           <div className="flex items-start gap-3 sm:gap-4">
@@ -389,7 +402,7 @@ export default function ProfilePage() {
                       </div>
                     ))
                   ) : (
-                    <div className="rounded-2xl border border-[var(--border)] bg-slate-50 p-4">
+                    <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-alt)] p-4">
                       <div className="flex items-start gap-3 sm:gap-4">
                         <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-slate-300 mt-1.5 sm:mt-2 shrink-0" />
                         <div className="space-y-1 sm:space-y-2">
@@ -435,20 +448,18 @@ export default function ProfilePage() {
 
               {/* SWITCH */}
               <button
-                onClick={() =>
-                  setDarkMode(!darkMode)
-                }
-                className={`w-20 sm:w-[84px] h-10 sm:h-[44px] rounded-full transition-all duration-300 flex p-1 sm:p-[5px] shrink-0 self-start sm:self-center ${darkMode
-                  ? "bg-slate-800 justify-end"
-                  : "bg-slate-200 justify-start"
+                onClick={toggleDarkMode}
+                className={`w-20 sm:w-[84px] h-10 sm:h-[44px] rounded-full transition-all duration-300 flex p-1 sm:p-[5px] shrink-0 self-start sm:self-center border ${darkMode
+                  ? "bg-[var(--bg)] border-[var(--border)] justify-end"
+                  : "bg-slate-200 border-slate-200 justify-start"
                   }`}
               >
 
-                <div className="w-8 h-8 sm:w-[34px] sm:h-[34px] rounded-full bg-white shadow-md flex items-center justify-center shrink-0">
+                <div className="w-8 h-8 sm:w-[34px] sm:h-[34px] rounded-full bg-[var(--surface)] shadow-md flex items-center justify-center shrink-0">
                   {darkMode ? (
                     <Moon
                       size={14}
-                      className="text-slate-700 sm:w-4 sm:h-4"
+                      className="text-[var(--text-secondary)] sm:w-4 sm:h-4"
                     />
                   ) : (
                     <Sun

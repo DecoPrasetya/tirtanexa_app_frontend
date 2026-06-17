@@ -138,7 +138,7 @@ function CreateQuestionForm() {
 
 export default function AdminCreateQuestionPage() {
   return (
-    <Suspense fallback={<div className="p-8 text-center text-slate-500">Memuat...</div>}>
+    <Suspense fallback={<div className="p-8 text-center text-[var(--text-muted)]">Memuat...</div>}>
       <CreateQuestionForm />
     </Suspense>
   );

@@ -66,7 +66,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             onFocus={(e) => {
               e.currentTarget.style.borderColor = error ? "var(--error)" : "var(--teal)";
               e.currentTarget.style.boxShadow = error ? "0 0 0 3px rgba(239,68,68,0.15)" : "0 0 0 3px rgba(33,155,158,0.15)";
-              e.currentTarget.style.backgroundColor = "#fff";
+              e.currentTarget.style.backgroundColor = "var(--surface)";
             }}
             onBlur={(e) => {
               e.currentTarget.style.borderColor = error ? "var(--error)" : "var(--border, #E5E7EB)";
