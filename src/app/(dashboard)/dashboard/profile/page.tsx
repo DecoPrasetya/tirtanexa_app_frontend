@@ -72,10 +72,10 @@ export default function ProfilePage() {
   const recentExams = [...history].sort((a, b) => new Date(b.startedAt).getTime() - new Date(a.startedAt).getTime()).slice(0, 5);
 
   return (
-    <div className="w-full flex justify-center px-4 py-10">
+    <div className="min-h-screen w-full flex justify-center px-4 md:px-8 pt-4 md:pt-6 pb-32">
 
       {/* CONTAINER */}
-      <div className="w-full max-w-5xl flex flex-col gap-8">
+      <div className="w-full max-w-4xl flex flex-col gap-6 lg:gap-8 mt-2 mb-24">
 
         {/* ================= PREMIUM (STUDENT ONLY) ================= */}
         {isStudent && (
@@ -83,8 +83,8 @@ export default function ProfilePage() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <div className="rounded-[32px] border border-[#20b8ae] bg-[#3ecdc3] shadow-sm overflow-hidden p-6 sm:p-8">
-              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 sm:gap-8">
+            <div className="rounded-3xl border border-[#20b8ae] bg-[#3ecdc3] shadow-sm overflow-hidden p-5 md:p-6 lg:p-8">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
 
                 {/* LEFT */}
                 <div className="flex flex-col sm:flex-row sm:items-start gap-5">
@@ -108,7 +108,7 @@ export default function ProfilePage() {
                 </div>
 
                 {/* BUTTON */}
-                <button className="bg-[#ff8c2b] hover:bg-[#ff7a0f] transition-all duration-300 rounded-2xl font-bold text-white w-full lg:w-fit whitespace-nowrap px-6 py-4 text-sm sm:text-base shrink-0">
+                <button className="bg-[#ff8c2b] hover:bg-[#ff7a0f] transition-all duration-300 rounded-2xl font-bold text-white w-full md:w-fit whitespace-nowrap px-6 py-3.5 text-sm sm:text-base shrink-0">
                   Upgrade Sekarang
                 </button>
               </div>
@@ -123,26 +123,26 @@ export default function ProfilePage() {
           transition={{ delay: 0.05 }}
         >
           <Card
-            className="rounded-[32px] border border-[var(--border)] shadow-sm"
+            className="rounded-3xl border border-[var(--border)] shadow-sm"
             padding="none"
           >
 
             {/* TOP */}
-            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 sm:gap-8 p-6 sm:p-8 lg:p-10">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 p-5 md:p-6 lg:p-8">
 
               {/* PROFILE */}
-              <div className="flex flex-col sm:flex-row sm:items-center gap-6">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-5 md:gap-6">
 
                 {/* AVATAR */}
-                <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-[34px] gradient-teal flex items-center justify-center text-white text-4xl sm:text-5xl font-black shadow-lg shrink-0 mx-auto sm:mx-0">
+                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-[28px] gradient-teal flex items-center justify-center text-white text-3xl sm:text-4xl font-black shadow-lg shrink-0 mx-auto sm:mx-0">
                   {user?.fullName?.charAt(0)?.toUpperCase() || "U"}
                 </div>
 
                 {/* TEXT */}
-                <div className="space-y-3 text-center sm:text-left flex flex-col items-center sm:items-start">
+                <div className="space-y-2 text-center sm:text-left flex flex-col items-center sm:items-start">
 
                   <div>
-                    <h1 className="font-black text-[var(--text)] text-3xl sm:text-4xl lg:text-5xl leading-none mb-2 sm:mb-3">
+                    <h1 className="font-black text-[var(--text)] text-2xl sm:text-3xl lg:text-4xl leading-none mb-1.5 sm:mb-2">
                       {user?.fullName || "User"}
                     </h1>
 
@@ -162,7 +162,7 @@ export default function ProfilePage() {
               </div>
 
               {/* BUTTON */}
-              <Link href="/dashboard/profile/edit" className="w-full lg:w-fit shrink-0 block">
+              <Link href="/dashboard/profile/edit" className="w-full md:w-fit shrink-0 block">
                 <Button
                   leftIcon={<Pencil size={16} />}
                   className="rounded-2xl h-12 sm:h-[52px] px-6 w-full"
@@ -173,9 +173,9 @@ export default function ProfilePage() {
             </div>
 
             {/* FORM */}
-            <div className="border-t border-[var(--border)] p-6 sm:p-8 lg:p-10">
+            <div className="border-t border-[var(--border)] p-5 md:p-6 lg:p-8">
 
-              <div className="max-w-3xl mx-auto space-y-6">
+              <div className="max-w-2xl mx-auto space-y-5">
 
                 {/* INPUT */}
                 <div className="space-y-2">
@@ -271,15 +271,15 @@ export default function ProfilePage() {
             transition={{ delay: 0.15 }}
           >
             <Card
-              className="rounded-[32px] overflow-hidden border border-[var(--border)] shadow-sm"
+              className="rounded-3xl overflow-hidden border border-[var(--border)] shadow-sm"
               padding="none"
             >
 
               {/* HEADER */}
-              <div className="border-b border-[var(--border)] flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-6 p-6 sm:p-8 lg:p-10">
+              <div className="border-b border-[var(--border)] flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 md:p-6 lg:p-8">
 
                 <div>
-                  <h2 className="font-black text-[var(--text)] text-2xl sm:text-3xl mb-2">
+                  <h2 className="font-black text-[var(--text)] text-xl sm:text-2xl mb-1.5">
                     Informasi Sekolah
                   </h2>
 
@@ -297,8 +297,8 @@ export default function ProfilePage() {
 
               {/* LIST */}
               <div>
-                <div className="flex flex-col lg:flex-row lg:items-start gap-2 lg:gap-8 border-b border-[var(--border)] p-5 sm:p-6 lg:p-8">
-                  <div className="font-bold text-xs sm:text-sm text-[var(--text-muted)] lg:w-32 shrink-0 flex items-center gap-2">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 border-b border-[var(--border)] p-4 md:p-6">
+                  <div className="font-bold text-xs sm:text-sm text-[var(--text-muted)] sm:w-40 shrink-0 flex items-center gap-2">
                     <School size={16} /> Asal Sekolah
                   </div>
                   <div className="font-semibold text-sm sm:text-base leading-snug sm:leading-relaxed text-[var(--text)]">
@@ -306,8 +306,8 @@ export default function ProfilePage() {
                   </div>
                 </div>
 
-                <div className="flex flex-col lg:flex-row lg:items-start gap-2 lg:gap-8 border-b border-[var(--border)] p-5 sm:p-6 lg:p-8">
-                  <div className="font-bold text-xs sm:text-sm text-[var(--text-muted)] lg:w-32 shrink-0 flex items-center gap-2">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 border-b border-[var(--border)] p-4 md:p-6">
+                  <div className="font-bold text-xs sm:text-sm text-[var(--text-muted)] sm:w-40 shrink-0 flex items-center gap-2">
                     <MapPin size={16} /> Kota / Domisili
                   </div>
                   <div className="font-semibold text-sm sm:text-base leading-snug sm:leading-relaxed text-[var(--text)]">
@@ -315,8 +315,8 @@ export default function ProfilePage() {
                   </div>
                 </div>
 
-                <div className="flex flex-col lg:flex-row lg:items-start gap-2 lg:gap-8 p-5 sm:p-6 lg:p-8">
-                  <div className="font-bold text-xs sm:text-sm text-[var(--text-muted)] lg:w-32 shrink-0 flex items-center gap-2">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 p-4 md:p-6">
+                  <div className="font-bold text-xs sm:text-sm text-[var(--text-muted)] sm:w-40 shrink-0 flex items-center gap-2">
                     <GraduationCap size={16} /> Tingkat / Kelas
                   </div>
                   <div className="font-semibold text-sm sm:text-base leading-snug sm:leading-relaxed text-[var(--text)]">
@@ -336,16 +336,16 @@ export default function ProfilePage() {
             transition={{ delay: 0.1 }}
           >
             <Card
-              className="rounded-[32px] border border-[var(--border)] shadow-sm"
+              className="rounded-3xl border border-[var(--border)] shadow-sm"
               padding="none"
             >
 
-              <div className="p-6 sm:p-8 lg:p-10">
+              <div className="p-5 md:p-6 lg:p-8">
 
                 {/* HEADER */}
-                <div className="mb-6 sm:mb-8 flex justify-between items-center">
+                <div className="mb-5 sm:mb-6 flex justify-between items-center">
                   <div>
-                    <h2 className="font-black text-[var(--text)] text-2xl sm:text-3xl mb-2">
+                    <h2 className="font-black text-[var(--text)] text-xl sm:text-2xl mb-1.5">
                       Aktivitas Terkini
                     </h2>
                     <p className="text-sm sm:text-base text-[var(--text-muted)]">
@@ -362,7 +362,7 @@ export default function ProfilePage() {
                     recentExams.map((exam) => (
                       <div
                         key={exam.id}
-                        className="rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] hover:bg-white transition-all duration-300 p-4 sm:p-5"
+                        className="rounded-2xl border border-[var(--border)] bg-slate-50 hover:bg-white transition-all duration-300 p-4"
                       >
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                           <div className="flex items-start gap-3 sm:gap-4">
@@ -389,7 +389,7 @@ export default function ProfilePage() {
                       </div>
                     ))
                   ) : (
-                    <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] p-4 sm:p-5">
+                    <div className="rounded-2xl border border-[var(--border)] bg-slate-50 p-4">
                       <div className="flex items-start gap-3 sm:gap-4">
                         <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-slate-300 mt-1.5 sm:mt-2 shrink-0" />
                         <div className="space-y-1 sm:space-y-2">
@@ -416,15 +416,15 @@ export default function ProfilePage() {
           transition={{ delay: 0.2 }}
         >
           <Card
-            className="rounded-[32px] border border-[var(--border)] shadow-sm"
+            className="rounded-3xl border border-[var(--border)] shadow-sm"
             padding="none"
           >
 
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-6 p-6 sm:p-8 lg:p-10">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-6 p-5 md:p-6 lg:p-8">
 
               <div>
 
-                <h2 className="font-black text-[var(--text)] text-2xl sm:text-3xl mb-2">
+                <h2 className="font-black text-[var(--text)] text-xl sm:text-2xl mb-1.5">
                   Tema
                 </h2>
 
@@ -461,6 +461,9 @@ export default function ProfilePage() {
             </div>
           </Card>
         </motion.div>
+
+        {/* Spacer untuk mobile bottom bar */}
+        <div className="h-32 md:h-12 w-full shrink-0 block"></div>
       </div>
     </div>
   );
